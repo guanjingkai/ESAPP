@@ -1,0 +1,34 @@
+{
+	"RootView":{
+		"width":"248",
+		"id":"AlayoutRoot",
+		"type":"do_ALayout",
+		"views":[
+			{
+				"width":"248",
+				"id":"do_alayout_1",
+				"type":"do_ALayout",
+				"views":[
+					{
+						"bgColor":"00000000",
+						"textAlign":"center",
+						"width":"248",
+						"fontSize":"30",
+						"id":"product_title",
+						"type":"do_Label",
+						"height":"77"
+					},
+					{
+						"bgColor":"FF3C62FF",
+						"width":"248",
+						"y":"77",
+						"fontSize":"30",
+						"id":"lb",
+						"type":"do_Label",
+						"height":"3"
+					}
+				]
+			}
+		]
+	}
+}

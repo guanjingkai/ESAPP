@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%;">
+<meta
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"
+	name="viewport" />
+
+<head>
+<meta charset="UTF-8">
+<title>123</title>
+</head>
+<style>
+* {
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+video::-webkit-media-controls {
+	display: none !important;
+}
+</style>
+
+<body style="width: 100%; height: 100%;">
+	<video id="video" class="video" autoplay="autoplay" src=""
+		x5-video-player-type="h4" x5-video-player-fullscreen="false" width="100%" height="100%"></video>
+	<script type="text/javascript">
+		var myVideo = document.getElementById("video");
+		myVideo.controls = false;
+
+		function play() {
+			myVideo.play();
+		}
+		function paused() {
+			return myVideo.paused;
+		}
+		function pause() {
+			myVideo.pause();
+		}
+		myVideo.addEventListener("x5videoexitfullscreen", function() {
+			//alert("exit fullscreen")
+			myVideo.setAttribute("x5-video-player-type", "h4");
+			myVideo.setAttribute("x5-video-player-fullscreen", "false");
+		})
+		myVideo.addEventListener("x5videoenterfullscreen", function() {
+			//alert("enter fullscreen")
+		})
+		var init = function(url) {
+			document.getElementById("video").src = url;
+			play();
+		}
+		var test = function() {
+			alert(1);
+		}
+		
+		function handleResize() {
+			  var sWidth = 9
+			  var sHeight = 16
+			  var width = window.innerWidth
+			  var height = window.innerHeight
+			  alert(width);
+			  alert(height);
+			  var marginTop = height - (width * sHeight) / sWidth
+			  marginTop = Math.round(marginTop)
+			  if (marginTop < -2) {
+				  myVideo.style.marginTop = marginTop / 2 + 'px';
+			  } else {
+				  myVideo.style.marginTop ='0';
+			  }
+			}
+		//沉浸式全屏
+		function fullScreenX() {
+			/* alert(1019);
+			myVideo.setAttribute("x5-video-player-type", "h5");
+			myVideo.setAttribute("x5-video-player-fullscreen", "ture");
+			pause();
+			play();
+			handleResize(); */
+			myVideo.webkitRequestFullScreen();
+		}
+	</script>
+</body>
+
+</html>

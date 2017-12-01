@@ -1,0 +1,33 @@
+{
+	"RootView":{
+		"width":"160",
+		"id":"AlayoutRoot",
+		"type":"do_ALayout",
+		"views":[
+			{
+				"width":"160",
+				"id":"do_alayout_1",
+				"type":"do_ALayout",
+				"views":[
+					{
+						"textAlign":"center",
+						"width":"160",
+						"fontSize":"30",
+						"id":"product_title",
+						"type":"do_Label",
+						"height":"77"
+					},
+					{
+						"bgColor":"FF3C62FF",
+						"width":"160",
+						"y":"77",
+						"fontSize":"30",
+						"id":"lb",
+						"type":"do_Label",
+						"height":"3"
+					}
+				]
+			}
+		]
+	}
+}
