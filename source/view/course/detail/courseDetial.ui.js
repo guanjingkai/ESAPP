@@ -13,6 +13,7 @@ var timerMask = mm("do_Timer");
 var config = require("config");
 var http = require("http_util");
 var edusoho = require("edusoho_util");
+var courseSetID = "";
 var courseID = "";
 var courseInfo = {};
 var courseJoin = ui("course_join");
@@ -29,7 +30,7 @@ var data = page.getData();
 if (data.course == "" || data.course == null || !data.hasOwnProperty("course")) {
 	nf.alert("APP异常 课程ID为空");
 } else {
-	courseID = data.course;
+	courseSetID = data.course;
 	courseCover.source = data.cover;
 }
 
@@ -60,27 +61,37 @@ var change_tab = function(index) {
 }
 courseTabData.addData(change_tab(0));
 var getCourseInfo = function() {
-	var apiName = "/api/course_set/" + courseID + "/courses";
+	var apiName = "/api/course_set/" + courseSetID + "/courses";
 	http.get(apiName, {}, function(data) {
 		data = JSON.parse(data);
 		if (edusoho.isResponseError(data)) {
-			courseInfo = data[0];
-			courseMainData.addData([ {
-				template : 0,
-				name : "介绍",
-				courseID : courseID,
-				courseInfo:data[0]
-			}, {
-				template : 1,
-				name : "目录",
-				courseID : courseID
-			}, {
-				template : 2,
-				name : "评价",
-				courseID : courseID
-			} ]);
-			courseMain.bindItems(courseMainData);
-			courseMain.refreshItems();
+			courseID = data[0].id;//不考虑多计划
+			var apiName = "/api/courses/"+courseID+'/items';
+			http.get(apiName,{},function(data2){
+				data2 = JSON.parse(data2);
+				if(edusoho.isResponseError(data2)){
+					courseInfo = data[0];
+					courseMainData.addData([ {
+						template : 0,
+						name : "介绍",
+						courseSetID : courseSetID,
+						courseInfo:data[0]
+					}, {
+						template : 1,
+						name : "目录",
+						itemData : data2
+					}, {
+						template : 2,
+						name : "评价",
+						courseSetID : courseSetID
+					} ]);
+					courseMain.bindItems(courseMainData);
+					courseMain.refreshItems();
+				}
+			},{
+				accept:"v2"
+			});
+			
 		}
 	}, {
 		accept : "v2",
@@ -121,6 +132,7 @@ animation.scale({
 	pivotY : 0.5
 }, "a1");
 courseJoin.on("touch", function() {
+	var orderInfo = 1;
 	deviceone.print("点击支付");
 	timer.stop();
 	if(courseInfo.access.code == "success"){
@@ -130,7 +142,7 @@ courseJoin.on("touch", function() {
 			if(timerNum == 1){
 				timer.stop();
 				timerNum ++;
-				deviceone.print("支付去了"+timerNum);
+				deviceone.print("支付去了"+orderInfo);
 				app.openPage({
 			    	source: "source://view/order/create/create_order.ui",
 			    	statusBarState: "show",
@@ -151,9 +163,19 @@ courseJoin.on("touch", function() {
 		timer.interval = 10000;
 		timerMask.delay = 1000;
 		timerMask.interval = 10000;
-		timer.start();
 		courseMask.animate(animation);
-		
+		//开始逻辑
+		var apiName = "/api/order_info";
+		http.post(apiName,{
+			targetType:"course",
+			targetId:courseID
+		},function(data){
+			orderInfo = data;
+			timer.start();
+		},{
+			accept:"v2",
+			token:true
+		});
 	}else{
 		nf.alert(courseInfo.access.msg);
 	}

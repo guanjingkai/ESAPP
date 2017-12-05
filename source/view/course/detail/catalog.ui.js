@@ -10,28 +10,17 @@ var page = sm("do_Page");
 var config = require("config");
 var http     = require("http_util");
 var edusoho  = require("edusoho_util");
-var courseID = "";
+var itemData = "";
 var rootView = ui("$");
 var catalogData = mm("do_ListData");
 var catalogList = ui("catalog_list");
 catalogList.bindItems(catalogData);
 
 rootView.on("dataRefreshed",function(d){
-	courseID = d.courseID;
-	getCourseInfo();
+	itemData = d.itemData;
+	setMapping(itemData);
 	
 })
-var getCourseInfo = function(){
-	var apiName = "/api/courses/"+courseID+'/items';
-	http.get(apiName,{},function(data){
-		data = JSON.parse(data);
-		if(edusoho.isResponseError(data)){
-			setMapping(data)
-		}
-	},{
-		accept:"v2"
-	});
-}
 var setMapping = function(data){
     catalogData.addData(data);
     catalogList.refreshItems();

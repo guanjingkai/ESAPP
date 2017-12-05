@@ -9,12 +9,12 @@ var app      = sm("do_App");
 var page     = sm("do_Page");
 var config	 = require("config");
 var http     = require("http_util");
-
+var weixin   = sm("do_TencentWX");
 var btnClose    = ui("btn_close");
 var btnLogin    = ui("btn_login");
 var btnRegister = ui("btn_register");
 var showerMain  = ui("shower_main");
-
+var weixinLogin = ui("weixin_login");
 showerMain.addViews([
 	{id:"login",path:"source://view/user/login_login.ui"},
 	{id:"register",path:"source://view/user/login_register.ui"}
@@ -52,3 +52,9 @@ slideMain.refreshItems();
 page.on("back", function() {
     app.closePage();
 });
+//微信支付
+weixinLogin.on("touch",function(){
+	weixin.login(config.wxAppID, function(data, e) {
+		nf.alert(data);
+	})
+})

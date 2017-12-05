@@ -27,10 +27,10 @@ var tabbarSnsLabel = ui("tabbar_sns_label");
 var tabbarMyLabel = ui("tabbar_my_label");
 
 main_shower.addViews([
-    {id : "index", path : "source://view/index/index.ui"},
-    {id : "wiki", path : "source://view/index/wiki.ui"},
-    {id : "sns", path : "source://view/index/sns.ui"},
-    {id : "my", path : "source://view/index/my.ui"}
+    {id : "index", path : "source://view/main/index.ui"},
+    {id : "wiki", path : "source://view/main/wiki.ui"},
+    {id : "sns", path : "source://view/main/sns.ui"},
+    {id : "my", path : "source://view/main/my.ui"}
 ]);
 
 /*********************************************************/

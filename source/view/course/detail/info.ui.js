@@ -21,7 +21,7 @@ var lessonNum = ui("lesson_num");
 var courseLevel = ui("course_level");
 rootView.on("dataRefreshed",function(d){
 	courseID = d.courseID;
-	vipLevelId = d.courseInfo.d.vipLevelId;
+	vipLevelId = d.courseInfo.vipLevelId;
 	setMapping(d.courseInfo);
 	
 })
@@ -38,8 +38,6 @@ var getCourseInfo = function(){
 	http.get(apiName,{},function(data){
 		data = JSON.parse(data);
 		if(edusoho.isResponseError(data)){
-			coursess = data[0];
-			nf.alert(coursess);
 			setMapping(data[0]);
 		}
 	},{
@@ -67,7 +65,7 @@ http.get(apiName,{
 			},function(data2){
 					data2 = JSON.parse(data2);
 					if(edusoho.isResponseError(data2)){
-						nf.alert(data2);
+						
 					}
 			},{
 				server:"esp"

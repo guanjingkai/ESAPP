@@ -4,28 +4,40 @@ var page     = sm("do_Page");
 var config	 = require("config");
 var http     = require("http_util");
 var edusoho  = require("edusoho_util");
-
+var bannerView = ui('banner_view');
 var indexCourse = ui('index_course');
+var bannerViewData = mm("do_ListData");
 var indexCourseData = mm("do_ListData");
 indexCourse.bindItems(indexCourseData);
+bannerView.bindItems(bannerViewData);
 /**
- * 首页推荐课程展示
+ * 首页banner
  */
 //var testPlayer = ui("test_player");
 //testPlayer.add("player", "source://view/course/videoPlayer.ui", 0, 0);
-
-var setMapping = function(data){
-	indexCourseData.addData(data[0].data);
-	indexCourse.refreshItems();
-}
-var apiName = "/api/app/channels";
-	http.get(apiName,{},function(data){
-		data = JSON.parse(data);
-		if(edusoho.isResponseError(data)){
-			setMapping(data);
-		}
+var apiName = "/mapi_v2/School/getSchoolBanner";
+http.get(apiName,{},function(data){
+	data = JSON.parse(data);
+	if(edusoho.isResponseError(data)){
+		bannerViewData.addData(data);
+		bannerView.refreshItems();
+	}
 },{
-	accept:"v2"
+accept:"v2"
+});
+bannerView.startLoop({interval : 3000});
+/**
+ * 首页推荐课程展示
+ */
+var apiName = "/api/app/channels";
+http.get(apiName,{},function(data){
+	data = JSON.parse(data);
+	if(edusoho.isResponseError(data)){
+		indexCourseData.addData(data[0].data);
+		indexCourse.refreshItems();
+	}
+},{
+accept:"v2"
 });
 
 //http test

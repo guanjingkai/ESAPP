@@ -5,6 +5,7 @@ var d = require("deviceone");
 var nf = d.sm("do_Notification");
 var config = require("config");
 var datacache= d.sm("do_DataCache");
+var serverUrl = config.serivceUrl;
 module.exports.post = post;
 module.exports.get = get;
 module.exports.resquestHttp = resquestHttp;
@@ -15,6 +16,7 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 	if(thisConfig == "" || thisConfig == null){
 		thisConfig = config
 	}else{
+		serverUrl = config.serivceUrl;
 		for(var key in thisConfig){
 			if(key == "token" && thisConfig[key] != false){
 				if(datacache.hasData("token")){
@@ -30,8 +32,9 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 				}
 				
 			}else if(key == "server" && thisConfig[key] != false){
+				nf.alert("esp");
 				if(thisConfig[key] == "esp"){
-					config["serivceUrl"] = config["espUrl"];
+					serverUrl = config.espUrl;
 				}
 				
 			}else{
@@ -44,7 +47,7 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 	
 	
 	http.method            = httpMethod;
-	http.url               = getUrl(thisConfig.serivceUrl,apiName);
+	http.url               = getUrl(serverUrl,apiName);
 	http.body              = formatHttpBody(data);
 	http.contentType       = thisConfig.httpContentType;
 	http.responseEncoding  = thisConfig.httpResponseEncoding;
@@ -58,7 +61,7 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 			callBack(data.data);
 		}
 	}).on("fail",function(data){
-		nf.alert("请求失败了"+JSON.stringify(data));
+		//nf.alert("请求失败了"+JSON.stringify(data));
 	});	
 }
 function post(apiName,data,callBack,thisConfig) {

@@ -86,6 +86,15 @@
 				"id":"shower_main",
 				"type":"do_ViewShower",
 				"height":"188"
+			},
+			{
+				"bgColor":"FFFFFFFF",
+				"x":"316",
+				"width":"122",
+				"y":"1042",
+				"id":"weixin_login",
+				"type":"do_Button",
+				"height":"114"
 			}
 		],
 		"height":"1334"
