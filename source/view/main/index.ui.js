@@ -5,8 +5,8 @@ var config	 = require("config");
 var http     = require("http_util");
 var edusoho  = require("edusoho_util");
 var bannerView = ui('banner_view');
-var indexCourse = ui('index_course');
 var bannerViewData = mm("do_ListData");
+var indexCourse = ui('index_course');
 var indexCourseData = mm("do_ListData");
 indexCourse.bindItems(indexCourseData);
 bannerView.bindItems(bannerViewData);
@@ -15,6 +15,7 @@ bannerView.bindItems(bannerViewData);
  */
 //var testPlayer = ui("test_player");
 //testPlayer.add("player", "source://view/course/videoPlayer.ui", 0, 0);
+
 var apiName = "/mapi_v2/School/getSchoolBanner";
 http.get(apiName,{},function(data){
 	data = JSON.parse(data);

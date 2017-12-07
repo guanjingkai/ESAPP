@@ -59,6 +59,13 @@
 						"id":"course_info",
 						"type":"do_ListView",
 						"height":"-1"
+					},
+					{
+						"width":"750",
+						"y":"-1",
+						"id":"coupon_box",
+						"type":"do_LinearLayout",
+						"height":"-1"
 					}
 				],
 				"height":"1146"

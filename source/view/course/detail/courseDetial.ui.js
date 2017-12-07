@@ -153,7 +153,8 @@ courseJoin.on("touch", function() {
 			    	animationType:"fade",
 			    	data:{
 			    		targetType:"course",
-						targetId:courseID,
+			    		courseID:courseID,
+						courseSetID:courseSetID,
 						cover : courseInfo.courseSet.cover,
 						studentNum : courseInfo.courseSet.studentNum
 			    	}

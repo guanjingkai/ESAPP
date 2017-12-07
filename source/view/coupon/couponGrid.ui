@@ -1,0 +1,20 @@
+{
+	"RootView":{
+		"x":"0",
+		"width":"750",
+		"y":"0",
+		"type":"do_ALayout",
+		"views":[
+			{
+				"templates":"source://view/coupon/cell/grid.ui",
+				"width":"740",
+				"y":"3",
+				"id":"coupon_grid",
+				"type":"do_GridView",
+				"numColumns":"2",
+				"height":"-1"
+			}
+		],
+		"height":"1334"
+	}
+}
