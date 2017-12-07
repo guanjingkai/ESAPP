@@ -37,7 +37,7 @@ var getCourseInfo = function(){
 	var apiName = "/api/course_set/"+courseID+"/courses";
 	http.get(apiName,{},function(data){
 		data = JSON.parse(data);
-		if(edusoho.isResponseError(data)){
+		if(edusoho.isResponseError(data,apiName)){
 			setMapping(data[0]);
 		}
 	},{
@@ -58,13 +58,13 @@ http.get(apiName,{
 	targetId:courseID
 },function(data){
 		data = JSON.parse(data);
-		if(edusoho.isResponseError(data)){
+		if(edusoho.isResponseError(data,apiName)){
 			http.get(apiName,{
 				targetType:"vip",
 				targetId:vipLevelId
 			},function(data2){
 					data2 = JSON.parse(data2);
-					if(edusoho.isResponseError(data2)){
+					if(edusoho.isResponseError(data2,apiName)){
 						
 					}
 			},{

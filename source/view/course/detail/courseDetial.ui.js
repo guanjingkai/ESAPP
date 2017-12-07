@@ -64,12 +64,12 @@ var getCourseInfo = function() {
 	var apiName = "/api/course_set/" + courseSetID + "/courses";
 	http.get(apiName, {}, function(data) {
 		data = JSON.parse(data);
-		if (edusoho.isResponseError(data)) {
+		if (edusoho.isResponseError(data,apiName)) {
 			courseID = data[0].id;//不考虑多计划
 			var apiName = "/api/courses/"+courseID+'/items';
 			http.get(apiName,{},function(data2){
 				data2 = JSON.parse(data2);
-				if(edusoho.isResponseError(data2)){
+				if(edusoho.isResponseError(data2,apiName)){
 					courseInfo = data[0];
 					courseMainData.addData([ {
 						template : 0,
@@ -117,7 +117,7 @@ courseMain.on("indexChanged", function(index) {
 	courseTab.refreshItems();
 });
 /** ******************************************************** */
-//animation.fillAfter = true;
+animation.fillAfter = true;
 animation.scale({
 	delay : 0,
 	duration : 600,
@@ -142,17 +142,25 @@ courseJoin.on("touch", function() {
 			if(timerNum == 1){
 				timer.stop();
 				timerNum ++;
+				orderInfo.cover = courseInfo.courseSet.cover;
+				orderInfo.studentNum = courseInfo.courseSet.studentNum;
 				deviceone.print("支付去了"+orderInfo);
 				app.openPage({
 			    	source: "source://view/order/create/create_order.ui",
 			    	statusBarState: "show",
 			    	statusBarFgColor:"white",
 			    	statusBarBgColor:"FF3C62FF",
-			    	animationType:"fade"
+			    	animationType:"fade",
+			    	data:{
+			    		targetType:"course",
+						targetId:courseID,
+						cover : courseInfo.courseSet.cover,
+						studentNum : courseInfo.courseSet.studentNum
+			    	}
 			    });	
 				timerMask.on("tick", function() {
 					if(timerNum == 2){
-						courseMask.visible = false;
+						//courseMask.visible = false;
 					}
 				});
 			}
@@ -161,21 +169,12 @@ courseJoin.on("touch", function() {
 		})
 		timer.delay = 300;
 		timer.interval = 10000;
-		timerMask.delay = 1000;
-		timerMask.interval = 10000;
+		//timerMask.delay = 1000;
+		//timerMask.interval = 10000;
 		courseMask.animate(animation);
 		//开始逻辑
-		var apiName = "/api/order_info";
-		http.post(apiName,{
-			targetType:"course",
-			targetId:courseID
-		},function(data){
-			orderInfo = data;
-			timer.start();
-		},{
-			accept:"v2",
-			token:true
-		});
+		timer.start();
+		
 	}else{
 		nf.alert(courseInfo.access.msg);
 	}

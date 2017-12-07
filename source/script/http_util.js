@@ -32,7 +32,6 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 				}
 				
 			}else if(key == "server" && thisConfig[key] != false){
-				nf.alert("esp");
 				if(thisConfig[key] == "esp"){
 					serverUrl = config.espUrl;
 				}

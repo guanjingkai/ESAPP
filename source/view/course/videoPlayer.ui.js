@@ -46,7 +46,7 @@ var startVideo = function(){
 		data = JSON.parse(data);
 
 		
-		if(edusoho.isResponseError(data)){
+		if(edusoho.isResponseError(data,apiName)){
 			//当前视频时长
 			allTime.text = getMS(data.length);
 			//当前播放时间
@@ -55,7 +55,7 @@ var startVideo = function(){
 			var mediaUri = data.mediaUri;
 			http.get(data.mediaUri,{},function(data2){
 				data2 = JSON.parse(data2);
-				if(edusoho.isResponseError(data2)){
+				if(edusoho.isResponseError(data2,apiName)){
 					//拿到当前视频的m3u8地址
 					var videoList = {
 							sd:data2[0].src,

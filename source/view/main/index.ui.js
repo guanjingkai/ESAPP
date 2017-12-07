@@ -18,7 +18,7 @@ bannerView.bindItems(bannerViewData);
 var apiName = "/mapi_v2/School/getSchoolBanner";
 http.get(apiName,{},function(data){
 	data = JSON.parse(data);
-	if(edusoho.isResponseError(data)){
+	if(edusoho.isResponseError(data,apiName)){
 		bannerViewData.addData(data);
 		bannerView.refreshItems();
 	}
@@ -32,14 +32,27 @@ bannerView.startLoop({interval : 3000});
 var apiName = "/api/app/channels";
 http.get(apiName,{},function(data){
 	data = JSON.parse(data);
-	if(edusoho.isResponseError(data)){
+	if(edusoho.isResponseError(data,apiName)){
 		indexCourseData.addData(data[0].data);
 		indexCourse.refreshItems();
 	}
 },{
 accept:"v2"
 });
-
+indexCourse.on("touch",function(d){
+	deviceone.print(JSON.stringify(d));
+	app.openPage({
+		source: "source://view/course/detail/courseDetial.ui",
+		statusBarState: "transparent",
+		statusBarFgColor:"white",
+		animationType:"slide_r2l",
+		data:{
+			course:indexCourseData.getOne({index:d}).id,
+			cover:indexCourseData.getOne({index:d}).cover.large,
+			minCoursePrice:indexCourseData.getOne({index:d}).minCoursePrice
+		}
+	});
+})
 //http test
 //var apiName = "/api/discovery_columns";
 //http.resquestHttp('get',apiName,{},function(data){

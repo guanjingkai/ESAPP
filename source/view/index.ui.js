@@ -5,10 +5,8 @@ page = sm("do_Page");
 InitData = sm("do_InitData")
 dataCache = sm("do_DataCache")
 /*********************************************************/
-dataCache.removeAll("data://videoPlayer.html");
-InitData.copyFile("initdata://videoPlayer.html","data://videoPlayer.html", function(data, e) {
-	
-})
+//dataCache.removeAll("data://videoPlayer.html");
+//InitData.copyFile("initdata://videoPlayer.html","data://videoPlayer.html", function(data, e) {})
 var main_shower = ui("main_shower");
 
 var tabbarIndex = ui("index");

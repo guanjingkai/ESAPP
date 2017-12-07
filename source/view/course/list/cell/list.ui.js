@@ -1,8 +1,8 @@
 /**
- * related to grid.ui
+ * related to list.ui
  * 
  * @Author : 18810151774
- * @Timestamp : 2017-11-26
+ * @Timestamp : 2017-12-06
  */
 var page = sm("do_Page");
 
@@ -25,6 +25,20 @@ rootView.on("dataRefreshed",function(d){
 		coursePrice.text = "免费";
 		coursePrice.fontColor = "37ECBBFF";
 	}
+	goCourse.on("touch",function(){
+			deviceone.print("打开了课程");
+			app.openPage({
+				source: "source://view/course/detail/courseDetial.ui",
+				statusBarState: "transparent",
+				statusBarFgColor:"white",
+				animationType:"slide_r2l",
+				data:{
+					course:d.id,
+					cover:d.cover.large,
+					minCoursePrice:d.minCoursePrice
+				}
+			});
+	});
 })
 var getMS = function(times){
 	var mm = Math.floor(times / 60);

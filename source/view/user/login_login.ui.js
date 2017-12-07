@@ -79,7 +79,7 @@ btnLogin.on("touch",function(){
 	};
 	http.resquestHttp('post',apiName,postData,function(data){
 		data = JSON.parse(data);
-		if(edusoho.isResponseError(data)){
+		if(edusoho.isResponseError(data,apiName)){
 			nf.alert(data.token);
 			datacache.saveData("user", data.user);
 			datacache.saveData("token", data.token);
