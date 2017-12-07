@@ -42,13 +42,13 @@
 						"type":"do_LinearLayout",
 						"views":[
 							{
-								"width":"192",
+								"width":"176",
 								"id":"do_ALayout_2",
 								"type":"do_ALayout",
 								"views":[]
 							},
 							{
-								"x":"192",
+								"x":"176",
 								"width":"40",
 								"id":"do_Label_4",
 								"text":"元",
@@ -57,14 +57,14 @@
 							},
 							{
 								"textAlign":"right",
-								"width":"108",
-								"x":"232",
-								"fontSize":"128",
+								"width":"134",
+								"x":"216",
+								"fontSize":"108",
 								"id":"do_Label_3",
 								"text":"15",
 								"type":"do_Label",
 								"fontColor":"FFFFFFFF",
-								"height":"140"
+								"height":"150"
 							}
 						],
 						"direction":"horizontal",
