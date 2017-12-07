@@ -25,7 +25,6 @@ var pageData = page.getData();
 //支付参数
 var payType = "alipay";
 var total_amount = 12;
-nf.alert(pageData);
 var orderInfo;
 //获取当前支付内容详情
 var apiName = "/api/order_info";
@@ -63,7 +62,7 @@ http.post(apiName,{
 						thisCoupons.push(data2[i]);
 					}else if (data2[i].targetType == "vip") {
 						//会员VIP券
-						if(data2[i].targetId == 0){
+						if(data2[i].targetId > -1){
 							if(data2[i].type == "minus"){
 								data2[i].title = "全VIP优惠券";
 							}else if (data2[i].type == "discount") {
@@ -85,8 +84,10 @@ http.post(apiName,{
 									thisCoupons.push(data2[i]);
 									couponGridData.addData(thisCoupons);
 									couponGrid.refreshItems();
-									nf.alert(thisCoupons);
 								}
+							},{
+								accept:"v2",
+								token:true
 							});
 						}
 						
@@ -95,7 +96,6 @@ http.post(apiName,{
 				}
 				couponGridData.addData(thisCoupons);
 				couponGrid.refreshItems();
-				nf.alert(thisCoupons);
 			}
 			
 		},{

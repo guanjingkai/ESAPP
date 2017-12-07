@@ -15,14 +15,14 @@
 				"views":[
 					{
 						"x":"7",
-						"width":"271",
-						"y":"189",
-						"fontSize":"16",
+						"width":"337",
+						"y":"184",
+						"fontSize":"18",
 						"id":"do_Label_1",
 						"text":"使用时间 2017.11.11-2020.1.1",
 						"type":"do_Label",
 						"fontColor":"FFFFFFFF",
-						"height":"22"
+						"height":"26"
 					},
 					{
 						"width":"212",
@@ -38,7 +38,7 @@
 					{
 						"width":"40",
 						"x":"317",
-						"y":"124",
+						"y":"118",
 						"fontSize":"36",
 						"id":"type_name",
 						"text":"元",
@@ -48,9 +48,9 @@
 					},
 					{
 						"textAlign":"right",
-						"width":"226",
-						"x":"100",
-						"y":"-18",
+						"width":"310",
+						"x":"7",
+						"y":"-11",
 						"fontSize":"168",
 						"id":"rate",
 						"text":"15",
