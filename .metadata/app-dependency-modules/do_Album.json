@@ -18,7 +18,7 @@
 				{
 					"DefaultValue":"",
 					"Type":"String",
-					"Description":"要收藏的图片文件路径,只支持data://下文件",
+					"Description":"要收藏的图片文件路径,支持initdata://、data://、source://下文件",
 					"Required":1,
 					"Deprecated":false,
 					"Type_JavaScript":"String",
@@ -28,7 +28,7 @@
 				{
 					"DefaultValue":"default.jpg",
 					"Type":"String",
-					"Description":"收藏到相册后的图片的名称,如果要收藏多个图片，记得设置不同的名称，否则会被覆盖",
+					"Description":"保存到相册后的图片的名称，如果要保存多个图片，需设置不同的名称，否则会被覆盖；由于系统限制此参数对iOS平台无效",
 					"Required":0,
 					"Deprecated":false,
 					"Type_JavaScript":"String",
@@ -68,12 +68,12 @@
 			],
 			"ID":"save",
 			"ReturnType":"Bool",
-			"Name":"收藏图片到系统相册",
+			"Name":"保存图片到系统相册",
 			"ReturnDesc":"保存成功返回true，保存失败返回false"
 		},
 		{
 			"ReturnType_JavaScript":"Node",
-			"Description":" 可以单选一张图片或者复选多张图片，选定的图片经过缩放最后默认会保存到data://temp/do_Album/目录下一个随机的名字的png文件上，然后返回给用户。\r\n\r\n 在Android下保存的文件名的扩展名是.png.do,这是为了避免Android的系统自动把图片加到系统相册。\r\n\r\n通常相册里的图片分辨率很高，很多超过1m，在App开发中最好通过缩放和减少图片质量来减少文件大小。\r\n\r\n这里图片缩放有可能导致图片变形，因为你选择的宽高比和图片自身的宽高比可能不一致，要解决的办法就是通过设置width或者height的参数值为－1来保证宽高比不变。\r\n\r\n<pre class=\"brush: js;toolbar:false;\">var album = sm(\"do_Album\");\nalbum.select(1, 188, -1, 100, true, function(data, e) {\n\tdeviceone.print(data[0]);\n})\nalbum.select({maxCount:1, width:188, height:-1, quality:100, iscut:true}, function(data, e) {\n\tdeviceone.print(data[0]);\n})</pre>",
+			"Description":" 可以单选一张图片或者复选多张图片，选定的图片经过缩放最后默认会保存到data://temp/do_Album/目录下一个随机的名字的png文件上，然后返回给用户。在Android下保存的文件名的扩展名是.png.do,这是为了避免Android的系统自动把图片加到系统相册。\r\n\r\n通常相册里的图片分辨率很高，很多超过1m，在App开发中最好通过缩放和减少图片质量来减少文件大小。\r\n\r\n这里图片缩放有可能导致图片变形，因为你选择的宽高比和图片自身的宽高比可能不一致，要解决的办法就是通过设置width或者height的参数值为－1来保证宽高比不变。",
 			"Deprecated":false,
 			"Paras":[
 				{
@@ -119,12 +119,22 @@
 				{
 					"DefaultValue":"false",
 					"Type":"Bool",
-					"Description":"只有在maxCount设置为1时该参数设置成true才有效。\r\n\r\n如果这个值为true的话，照片选择结束后会出现一个中间的取景界面，有一个矩形框让用户对照片进行裁剪。\r\n\r\n这里可以参考<a href=\"http://doc.deviceone.net/web/doc/code4do/imagecrop.htm\">do_ImageCropView</a>组件来实现新的取景方法。\r\n\r\n注:windows不支持这个参数。\r\n",
+					"Description":"只有在maxCount设置为1时该参数设置成true才有效。如果这个值为true的话，照片选择结束后会出现一个中间的取景界面，有一个矩形框让用户对照片进行裁剪。这里可以参考<a href=\"http://doc.deviceone.net/web/doc/code4do/imagecrop.htm\">do_ImageCropView</a>组件来实现新的取景方法。注:windows不支持这个参数。",
 					"Required":0,
 					"Deprecated":false,
 					"Type_JavaScript":"Bool",
 					"ID":"iscut",
 					"Name":"是否启动中间取景界面"
+				},
+				{
+					"DefaultValue":"0",
+					"Type":"Number",
+					"Description":"相册组件选择模式:0-仅图片；1-仅视频；2-图片与视频",
+					"Required":0,
+					"Deprecated":false,
+					"Type_JavaScript":"Number",
+					"ID":"type",
+					"Name":"选择模式"
 				}
 			],
 			"ID":"select",
@@ -138,7 +148,7 @@
 		"Support":1
 	},
 	"Properties":[],
-	"Name":"相册",
+	"Name":"系统相册",
 	"Android":{
 		"MinVersion":"4.0",
 		"Support":1

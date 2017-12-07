@@ -102,21 +102,6 @@
 				"Type":"Boolean",
 				"Data":[]
 			},
-			"DefaultValue":"true",
-			"Group":"",
-			"Type":"Bool",
-			"EditType":"1",
-			"Description":"为true时可以获取焦点,false的时候无法获取焦点",
-			"Deprecated":false,
-			"Type_JavaScript":"Bool",
-			"ID":"enabled",
-			"Name":"控制WebView是否可以获取焦点"
-		},
-		{
-			"Design":{
-				"Type":"Boolean",
-				"Data":[]
-			},
 			"DefaultValue":"false",
 			"Group":"",
 			"Type":"Bool",
@@ -327,6 +312,14 @@
 	"BBS":"",
 	"Version":"Internal",
 	"Events":[
+		{
+			"ReturnType_JavaScript":"String",
+			"Description":"html页面事件",
+			"Deprecated":false,
+			"ID":"eventFromHtml",
+			"ReturnType":"String",
+			"ReturnDesc":"html页面与do组件进行交互，需要在html页面添加：javascript:window.do_TencentWebView.fire('参数值'); ，html页面执行该语句就会触发 eventFromHtml 事件"
+		},
 		{
 			"ReturnType_JavaScript":"String",
 			"Description":"加载错误事件",

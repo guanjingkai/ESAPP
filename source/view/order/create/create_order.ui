@@ -61,10 +61,12 @@
 						"height":"-1"
 					},
 					{
+						"templates":"source://view/coupon/cell/grid.ui",
 						"width":"750",
 						"y":"-1",
-						"id":"coupon_box",
-						"type":"do_LinearLayout",
+						"id":"coupon_grid",
+						"type":"do_GridView",
+						"numColumns":"2",
 						"height":"-1"
 					}
 				],

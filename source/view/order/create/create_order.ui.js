@@ -16,6 +16,10 @@ var doPay = ui("do_pay");
 var courseInfoData = mm("do_ListData");
 var btnClose = ui("btn_close");
 var couponBox = ui("coupon_box");
+var couponGrid = ui('coupon_grid');
+var couponGridData = mm("do_ListData");
+
+couponGrid.bindItems(couponGridData);
 var pageData = page.getData();
 
 //支付参数
@@ -23,6 +27,7 @@ var payType = "alipay";
 var total_amount = 12;
 nf.alert(pageData);
 var orderInfo;
+//获取当前支付内容详情
 var apiName = "/api/order_info";
 http.post(apiName,{
 	targetType:pageData.targetType,
@@ -39,31 +44,71 @@ http.post(apiName,{
 			targetType:orderInfo.targetType
 		}]);
 		courseInfo.refreshItems();
-	}
-	
-},{
-	accept:"v2",
-	token:true
-});
-//当前课程可用优惠券
-var thisCoupons = [];
-var apiName = "/api/me/coupons";
-http.get(apiName,{},function(data){
-	data = JSON.parse(data);
-	if (edusoho.isResponseError(data,apiName)) {
-		for(var i = 0;i<data.length;i++){
-			if(data[i].targetType == pageData.targetType && data[i].targetId == pageData.courseSetID){
-				thisCoupons.push(data[i]);
+		//当前课程可用优惠券
+		var thisCoupons = [];
+		var couponNum= 1;
+		var apiName = "/api/me/coupons";
+		http.get(apiName,{},function(data2){
+			data2 = JSON.parse(data2);
+			
+			if (edusoho.isResponseError(data2,apiName)) {
+				for(var i = 0;i<data2.length;i++){
+					if(data2[i].targetType == pageData.targetType && (data2[i].targetId == pageData.courseSetID || data2[i].targetId == 0)){
+						if(data2[i].type == "minus"){
+							data2[i].title = "本课程优惠券";
+						}else if (data2[i].type == "discount") {
+							data2[i].title = "本课程打折券";
+						}
+						data2[i].num = couponNum;couponNum++;
+						thisCoupons.push(data2[i]);
+					}else if (data2[i].targetType == "vip") {
+						//会员VIP券
+						if(data2[i].targetId == 0){
+							if(data2[i].type == "minus"){
+								data2[i].title = "全VIP优惠券";
+							}else if (data2[i].type == "discount") {
+								data2[i].title = "全VIP打折券";
+							}
+							data2[i].num = couponNum;couponNum++;
+							thisCoupons.push(data2[i]);
+						}else{
+							var apiName = "/api/plugins/vip/vip_levels/"+data2[i].targetId;
+							http.get(apiName,{},function(data3){
+								data3 = JSON.parse(data3);
+								if (edusoho.isResponseError(data3,apiName)) {
+									if(data2[i].type == "minus"){
+										data2[i].title = data3.name+"优惠券";
+									}else if (data3[i].type == "discount") {
+										data2[i].title = data3.name+"打折券";
+									}
+									data2[i].num = couponNum;couponNum++;
+									thisCoupons.push(data2[i]);
+									couponGridData.addData(thisCoupons);
+									couponGrid.refreshItems();
+									nf.alert(thisCoupons);
+								}
+							});
+						}
+						
+					}
+				
+				}
+				couponGridData.addData(thisCoupons);
+				couponGrid.refreshItems();
+				nf.alert(thisCoupons);
 			}
-			//会员VIP券
-		}
-		couponBox.add("course_grid", "source://view/coupon/cell/grid.ui", 2);
+			
+		},{
+			accept:"v2",
+			token:true
+		});
 	}
 	
 },{
 	accept:"v2",
 	token:true
 });
+
 
 doPay.on("touch",function(){
 	var apiName = "/api/orders";

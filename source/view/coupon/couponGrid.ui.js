@@ -14,8 +14,8 @@ var couponGrid = ui('coupon_grid');
 var couponGridData = mm("do_ListData");
 
 couponGrid.bindItems(couponGridData);
+couponGridData.addData([{a:1},{a:1},{a:1}]);
+couponGrid.refreshItems();
 rootView.on("dataRefreshed",function(d){
-	nf.alert(d);
-	couponGridData.addData([{},{},{}]);
-	couponGrid.refreshItems();
+
 })

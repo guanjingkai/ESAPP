@@ -8,7 +8,6 @@
 			{
 				"templates":"source://view/coupon/cell/grid.ui",
 				"width":"740",
-				"y":"3",
 				"id":"coupon_grid",
 				"type":"do_GridView",
 				"numColumns":"2",

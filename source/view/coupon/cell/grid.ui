@@ -25,50 +25,38 @@
 						"height":"22"
 					},
 					{
-						"x":"12",
-						"y":"14",
-						"fontSize":"18",
-						"id":"do_Label_2",
+						"width":"212",
+						"x":"7",
+						"y":"16",
+						"fontSize":"24",
+						"id":"title",
 						"text":"课程优惠券",
 						"type":"do_Label",
 						"fontColor":"FFFFFFFF",
-						"height":"24"
+						"height":"30"
 					},
 					{
-						"x":"5",
-						"width":"350",
-						"y":"37",
-						"id":"do_LinearLayout_1",
-						"type":"do_LinearLayout",
-						"views":[
-							{
-								"width":"176",
-								"id":"do_ALayout_2",
-								"type":"do_ALayout",
-								"views":[]
-							},
-							{
-								"x":"176",
-								"width":"40",
-								"id":"do_Label_4",
-								"text":"元",
-								"type":"do_Label",
-								"fontColor":"FFFFFFFF"
-							},
-							{
-								"textAlign":"right",
-								"width":"134",
-								"x":"216",
-								"fontSize":"108",
-								"id":"do_Label_3",
-								"text":"15",
-								"type":"do_Label",
-								"fontColor":"FFFFFFFF",
-								"height":"150"
-							}
-						],
-						"direction":"horizontal",
-						"height":"150"
+						"width":"40",
+						"x":"317",
+						"y":"124",
+						"fontSize":"36",
+						"id":"type_name",
+						"text":"元",
+						"type":"do_Label",
+						"fontColor":"FFFFFFFF",
+						"height":"42"
+					},
+					{
+						"textAlign":"right",
+						"width":"226",
+						"x":"100",
+						"y":"-18",
+						"fontSize":"168",
+						"id":"rate",
+						"text":"15",
+						"type":"do_Label",
+						"fontColor":"FFFFFFFF",
+						"height":"180"
 					}
 				],
 				"height":"216"
