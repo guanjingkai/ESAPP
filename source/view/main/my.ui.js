@@ -4,10 +4,10 @@ var page     = sm("do_Page");
 var config	 = require("config");
 var http     = require("http_util");
 var datacache= sm("do_DataCache");
-
-var user = datacache.loadData("user");
-var wiki_set = ui("avatar");
-wiki_set.on("touch",function(){
+var userName = ui("user_name");
+var userAvatar = ui("user_avatar");
+var userInfo = datacache.loadData("user");
+userAvatar.on("touch",function(){
 	app.openPage({
     	source: "source://view/user/login.ui",
     	statusBarState: "transparent",
@@ -16,6 +16,14 @@ wiki_set.on("touch",function(){
     });
 });
 
-var userName = ui("user_name");
-userName.text = user.nickname;
-
+function setUserInfo(userInfo){
+	userName.text = userInfo.nickname;
+	userAvatar.source = userInfo.avatar;
+}
+if(datacache.hasData("user")){
+	setUserInfo(datacache.loadData("user"));
+}
+app.on("refreshUser",function(){
+	deviceone.print("刷新登录用户信息");
+	setUserInfo(datacache.loadData("user"));
+})
