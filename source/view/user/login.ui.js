@@ -60,10 +60,12 @@ weixinLogin.on("touch",function(){
 	weixin.login(config.wxAppID, function(data, e) {
 		if(data.errCode == 0){
 			//通过Code获取AccessToken OpenId
-			var apiName = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+config.wxAppID+"&secret="+config.wxAppSecret+"&code="+data.code+"&grant_type=authorization_code";
-			http.get(apiName,{},function(data2){
+			deviceone.print(data.code);
+			var apiName = "/weixin/login";
+			http.post(apiName,{
+				code:data.code
+			},function(data2){
 				data2 = JSON.parse(data2);
-				
 					var apiName = "/api/tokens";
 					http.post(apiName,{
 						access_token:data2.access_token,
@@ -88,7 +90,9 @@ weixinLogin.on("touch",function(){
 						}		
 					},{accept:"v2"});
 				
-			},{});
+			},{
+				server:"esp"
+			});
 		}else if (data.errCode == -2) {
 			nf.alert("用户取消授权")
 		}else if (data.errCode == -4) {
