@@ -9,14 +9,14 @@ module.exports.jsonToRaw = jsonToRaw;
 module.exports.formatDate = formatDate;
 
 //json转url参数
-var jsonToRaw = function(param, key) {
+var jsonToRaw = function(param) {
     var paramStr = "";
     if (param instanceof String || param instanceof Number || param instanceof Boolean) {
         paramStr += "&" + key + "=" + encodeURIComponent(param);
     } else {
         $.each(param, function(i) {
-            var k = key == null ? i : key + (param instanceof Array ? "[" + i + "]" : "." + i);
-            paramStr += '&' + parseParam(this, k);
+            //var k = key == null ? i : key + (param instanceof Array ? "[" + i + "]" : "." + i);
+            paramStr += '&' + parseParam(this);
         });
     }
     return paramStr.substr(1);

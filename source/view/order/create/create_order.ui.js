@@ -118,18 +118,18 @@ doPay.on("touch",function(){
 	},function(data){
 		data = JSON.parse(data);
 		if (edusoho.isResponseError(data,apiName)) {
-			var apiName = "/api/pay_center";
+			var apiName = "/pay/aliapp";
+			nf.alert(data);
 			http.post(apiName,{
-				orderId:data.id,
-				targetId:orderInfo.targetId,
-				targetType:orderInfo.targetType
+				sn:data.sn
 			},function(data2){
 				data2 = JSON.parse(data2);
 				if (edusoho.isResponseError(data2,apiName)) {
-					pay.getaway(payType, "123", data.sn, total_amount)
+					pay.getaway(payType, data2)
 				}
 			},{
 				accept: "v2",
+				server: "esp",
 				token:true
 			})
 		}

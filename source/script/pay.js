@@ -8,28 +8,14 @@ var weixin= d.sm("do_TencentWX");
 var serverUrl = config.serivceUrl;
 module.exports.getaway = getaway;
 
-function getaway(payType,title, sn, total_amount){
+function getaway(payType,payParam){
 	if(payType == "alipay"){
-		alipay_app(title, sn, total_amount);
+		alipay_app(payParam);
 	}
 }
-function alipay_app(title,sn,total_amount){	
-	var payParam = "app_id="+config.aliAppID+
-		"&method=alipay.trade.app.pay"+
-		"&charset=utf-8"+
-		"&sign_type=MD5"+
-		"&sign="+
-		"&timestamp="+common.formatDate(new Date())+
-		"&version=1.0"+
-		"&notify_url="+
-		"&biz_content="+
-		"&subject="+title+
-		"&out_trade_no="+sn+
-		"&total_amount="+total_amount+
-		"&product_code=QUICK_MSECURITY_PAY";
-
+function alipay_app(payParam){	
 	alipay.pay({
-		orderStr:payParam
+		orderStr:payParam['orderStr']
 	},function(data){
 		data = JSON.parse(data);
 		nf.alert(data);
@@ -48,3 +34,13 @@ function weixin_app(title,sn,total_amount){
 		nf.alert(data);
 	})
 }
+var jsonToRaw = function(param) {
+	var str = ""
+	for(var i in param){
+		str = str+i+"="+param[i]+"&";
+		d.print(i);
+		d.print(param[i]);
+	 }
+	d.print(str.substr(0,str.length-1));
+    return str.substr(0,str.length-1);
+};
