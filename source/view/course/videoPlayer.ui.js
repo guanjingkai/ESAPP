@@ -7,11 +7,14 @@
 var nf       = sm("do_Notification");
 var app      = sm("do_App");
 var page     = sm("do_Page");
-var config	 = require("config");
-var http     = require("http_util");
-var edusoho  = require("edusoho_util");
 var datacache= sm("do_DataCache");
 var doDevice = sm("do_Device");
+
+var config	 = require("config/config");
+var http     = require("util/http");
+var edusoho  = require("util/edusoho");
+
+
 //假设课程内容
 var lessonID = "/api/lessons/244";
 var start = ui("start");

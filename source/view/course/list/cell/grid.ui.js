@@ -5,9 +5,9 @@
  * @Timestamp : 2017-11-26
  */
 var page = sm("do_Page");
-
 var app      = sm("do_App");
 var rootView = ui("$");
+
 var courseImage = ui("course_image");
 var courseTitle = ui("course_title");
 var courseInfo = ui("course_info");

@@ -1,7 +1,7 @@
 var d = require("deviceone");
-var common = require("common");
+var common = require("util/common");
 var nf = d.sm("do_Notification");
-var config = require("config");
+var config = require("config/config");
 var datacache= d.sm("do_DataCache");
 var alipay= d.sm("do_Alipay1");
 var weixin= d.sm("do_TencentWX");

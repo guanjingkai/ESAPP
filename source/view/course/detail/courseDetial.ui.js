@@ -4,15 +4,20 @@
  * @Author : 18810151774
  * @Timestamp : 2017-11-05
  */
+//Require System Lib
 var nf = sm("do_Notification");
 var app = sm("do_App");
 var page = sm("do_Page");
 var animation = mm("do_Animation");
 var timer = mm("do_Timer");
 var timerMask = mm("do_Timer");
-var config = require("config");
-var http = require("http_util");
-var edusoho = require("edusoho_util");
+//Require util
+var config = require("config/config");
+var http = require("util/http");
+var edusoho = require("util/edusoho");
+//Require Model
+var course = require("model/course");
+//Bind UI
 var courseSetID = "";
 var courseID = "";
 var courseInfo = {};
@@ -39,66 +44,31 @@ btnClose.on("touch", function() {
 	app.closePage();
 });
 var change_tab = function(index) {
-	var data = [ {
-		template : 0,
-		name : "介绍",
-		fontColor : "C0C0C0FF",
-		lb : false
-	}, {
-		template : 0,
-		name : "目录",
-		fontColor : "C0C0C0FF",
-		lb : false
-	}, {
-		template : 0,
-		name : "评价",
-		fontColor : "C0C0C0FF",
-		lb : false
-	} ];
+	var data = [{template : 0,name : "介绍",fontColor : "C0C0C0FF",lb : false}, 
+	            {template : 0,name : "目录",fontColor : "C0C0C0FF",lb : false}, 
+	            {template : 0,name : "评价",fontColor : "C0C0C0FF",lb : false}];
 	data[index].fontColor = "FF3C62FF";
 	data[index].lb = true;
 	return data;
 }
 courseTabData.addData(change_tab(0));
-var getCourseInfo = function() {
-	var apiName = "/api/course_set/" + courseSetID + "/courses";
-	http.get(apiName, {}, function(data) {
-		data = JSON.parse(data);
-		if (edusoho.isResponseError(data,apiName)) {
-			courseID = data[0].id;//不考虑多计划
-			var apiName = "/api/courses/"+courseID+'/items';
-			http.get(apiName,{},function(data2){
-				data2 = JSON.parse(data2);
-				if(edusoho.isResponseError(data2,apiName)){
-					courseInfo = data[0];
-					courseMainData.addData([ {
-						template : 0,
-						name : "介绍",
-						courseSetID : courseSetID,
-						courseInfo:data[0]
-					}, {
-						template : 1,
-						name : "目录",
-						itemData : data2
-					}, {
-						template : 2,
-						name : "评价",
-						courseSetID : courseSetID
-					} ]);
-					courseMain.bindItems(courseMainData);
-					courseMain.refreshItems();
-				}
-			},{
-				accept:"v2"
-			});
-			
-		}
-	}, {
-		accept : "v2",
-		token:true
+
+var getCourseInfo = function(courseSetID){
+	course.getCourseSetDetail(courseSetID,function(courseSetDetail){
+		courseID = courseSetDetail[0].id;//不考虑多计划
+		courseInfo = courseSetDetail[0];
+		course.getCourseItem(courseID,function(courseItem) {
+			courseMainData.addData([
+			    {template : 0,name : "介绍",courseSetID : courseSetID,courseInfo:courseInfo},
+				{template : 1,name : "目录",itemData : courseItem}, 
+				{template : 2,name : "评价",courseSetID : courseSetID}
+			]);
+			courseMain.bindItems(courseMainData);
+			courseMain.refreshItems();
+		})
 	});
 }
-getCourseInfo();
+getCourseInfo(courseSetID);
 courseTab.bindItems(courseTabData);
 courseTab.refreshItems();
 courseTab.on("indexChanged", function(index) {

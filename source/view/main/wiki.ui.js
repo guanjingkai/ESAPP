@@ -1,7 +1,8 @@
 var nf       = sm("do_Notification");
 var app      = sm("do_App");
 var page     = sm("do_Page");
-var config	 = require("config");
+
+var config	 = require("util/config");
 //http test
 
 /***********************************************************/

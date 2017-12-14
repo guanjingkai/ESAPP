@@ -3,7 +3,7 @@
  */
 var d = require("deviceone");
 var nf = d.sm("do_Notification");
-var config = require("config");
+var config = require("config/config");
 var datacache= d.sm("do_DataCache");
 var serverUrl = config.serivceUrl;
 module.exports.post = post;

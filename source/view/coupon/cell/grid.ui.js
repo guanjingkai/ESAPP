@@ -5,8 +5,8 @@
  * @Timestamp : 2017-12-07
  */
 var page = sm("do_Page");
-
 var app      = sm("do_App");
+
 var rootView = ui("$");
 var title = ui("title");
 var rate = ui("rate");

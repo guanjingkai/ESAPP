@@ -1,9 +1,11 @@
 var nf       = sm("do_Notification");
 var app      = sm("do_App");
 var page     = sm("do_Page");
-var config	 = require("config");
-var http     = require("http_util");
 var datacache= sm("do_DataCache");
+
+var config	 = require("config/config");
+var http     = require("util/http");
+
 var userName = ui("user_name");
 var userAvatar = ui("user_avatar");
 var userInfo = datacache.loadData("user");
