@@ -42,7 +42,8 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 		}
 		thisConfig = config
 	}
-	
+	http.setRequestHeader("Accept-Encoding","gzip");
+	http.setRequestHeader("User-Agent","okhttp/3.8.0");
 	
 	
 	http.method            = httpMethod;

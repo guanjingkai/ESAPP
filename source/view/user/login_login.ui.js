@@ -77,7 +77,7 @@ btnLogin.on("touch",function(){
 	var apiName = "/mapi_v2/User/login";
 	var postData = {
 			_username : "gjk1992@sina.com",//inputTel.text,
-			_password : "0281109aA"//inputPassword.text
+			_password : "123456"//inputPassword.text
 	};
 	http.resquestHttp('post',apiName,postData,function(data){
 		data = JSON.parse(data);

@@ -10,7 +10,7 @@ module.exports.getCourseSetDetail = getCourseSetDetail;
 module.exports.getCourseItem = getCourseItem;
 
 function getCourseSetDetail (courseSetID,callBack) {
-	var apiName = "/api/course_set/" + courseSetID + "/courses";
+	var apiName = "/api/course_sets/" + courseSetID + "/courses";
 	http.get(apiName, {}, function(data) {
 		data = JSON.parse(data);
 		if (edusoho.isResponseError(data,apiName)) {
