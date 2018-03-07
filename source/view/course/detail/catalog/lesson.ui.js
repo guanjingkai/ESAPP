@@ -56,7 +56,6 @@ itemBox.on("touch",function(){
 		data = JSON.parse(data);
 		if(edusoho.isResponseError(data,apiName)){
 			Algorithm.md5('string', config.esplusKey + data.mediaUri, function(data, e) {
-				deviceone.print(data)
 				var apiName2 = "/video/info";
 				http.post(apiName2,{
 					id:courseID
@@ -66,7 +65,6 @@ itemBox.on("touch",function(){
 					var m3u8url = "";
 					var maxheight = 0;
 					for(var i = 0; i < videoInfo.data.PlayInfoList.PlayInfo.length;i++){
-						deviceone.print(i);
 						if(videoInfo.data.PlayInfoList.PlayInfo[i].Height > maxheight){
 							m3u8url = videoInfo.data.PlayInfoList.PlayInfo[i].PlayURL;
 						}

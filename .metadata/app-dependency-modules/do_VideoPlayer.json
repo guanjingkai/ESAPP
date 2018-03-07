@@ -42,9 +42,19 @@
 					"Description":"从视频中的某一点开始播放，毫秒值",
 					"Required":0,
 					"Deprecated":false,
-					"Type_JavaScript":"Number",
+					"Type_JavaScript":"String",
 					"ID":"point",
 					"Name":"播放起点"
+				},
+				{
+					"DefaultValue":"0",
+					"Type":"String",
+					"Description":"0是横屏，1是竖屏，默认横屏",
+					"Required":0,
+					"Deprecated":false,
+					"Type_JavaScript":"Number",
+					"ID":"default",
+					"Name":"横竖屏"
 				}
 			],
 			"ID":"play",

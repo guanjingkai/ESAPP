@@ -153,6 +153,21 @@
 					},
 					{
 						"visible":"false",
+						"bgColor":"000000FF",
+						"width":"750",
+						"id":"loadingBg",
+						"type":"do_ALayout",
+						"height":"450"
+					},
+					{
+						"visible":"false",
+						"width":"750",
+						"id":"loading",
+						"type":"do_FrameAnimationView",
+						"height":"450"
+					},
+					{
+						"visible":"false",
 						"x":"316",
 						"y":"194",
 						"id":"play",

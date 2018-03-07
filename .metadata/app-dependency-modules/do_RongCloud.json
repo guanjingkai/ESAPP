@@ -217,7 +217,7 @@
 		}
 	],
 	"IOS":{
-		"MinVersion":"7.0",
+		"MinVersion":"8.0",
 		"Support":1
 	},
 	"Properties":[],
@@ -227,6 +227,88 @@
 		"Support":1
 	},
 	"syncMethodes":[
+		{
+			"ReturnType_JavaScript":"",
+			"Description":"本地持久化缓存群组信息",
+			"Deprecated":false,
+			"Paras":[
+				{
+					"DefaultValue":"",
+					"Type":"String",
+					"Description":"",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"String",
+					"ID":"groupId",
+					"Name":"群组id"
+				},
+				{
+					"DefaultValue":"",
+					"Type":"String",
+					"Description":"",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"String",
+					"ID":"groupName",
+					"Name":"群组名"
+				},
+				{
+					"DefaultValue":"",
+					"Type":"String",
+					"Description":"支持本地文件,data:// source:// 打头的URI格式和网络图片",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"String",
+					"ID":"headPortrait",
+					"Name":"头像"
+				}
+			],
+			"ID":"cacheGroupInfo",
+			"ReturnType":"",
+			"Name":"缓存群组信息",
+			"ReturnDesc":""
+		},
+		{
+			"ReturnType_JavaScript":"",
+			"Description":"本地持久化缓存用户信息",
+			"Deprecated":false,
+			"Paras":[
+				{
+					"DefaultValue":"",
+					"Type":"String",
+					"Description":"",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"String",
+					"ID":"userId",
+					"Name":"用户id"
+				},
+				{
+					"DefaultValue":"",
+					"Type":"String",
+					"Description":"",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"String",
+					"ID":"nickName",
+					"Name":"昵称"
+				},
+				{
+					"DefaultValue":"",
+					"Type":"String",
+					"Description":"支持本地文件,data:// source:// 打头的URI格式和网络图片",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"String",
+					"ID":"headPortrait",
+					"Name":"头像"
+				}
+			],
+			"ID":"cacheUserInfo",
+			"ReturnType":"",
+			"Name":"缓存用户信息",
+			"ReturnDesc":""
+		},
 		{
 			"ReturnType_JavaScript":"如果最新一条消息为接收消息则不返回isSend,receiveTime为接收时间,sentTime为发送时间,两者都是long型时间",
 			"Description":"",

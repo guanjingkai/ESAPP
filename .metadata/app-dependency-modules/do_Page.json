@@ -86,6 +86,16 @@
 					"Type_JavaScript":"Bool",
 					"ID":"support",
 					"Name":"是否支持手势滑动关闭"
+				},
+				{
+					"DefaultValue":"false",
+					"Type":"Bool",
+					"Description":"当supportEdge值为false时，则当前page为全屏滑动关闭手势,默认值为false;当supportEdge值为true时，则当前page为边缘滑动关闭手势,且当前page以以下animationType openPage或者ClosePage时边缘手势才生效: slide_l2r 、slide_r2l 、push_l2r 、push_r2l 、slide_l2r_1 、slide_r2l_1 、push_l2r_1 、push_r2l_1 、fade 、cube (一共10种)",
+					"Required":0,
+					"Deprecated":false,
+					"Type_JavaScript":"Bool",
+					"ID":"supportEdge",
+					"Name":"是否支持边缘手势滑动关闭"
 				}
 			],
 			"ID":"supportPanClosePage",

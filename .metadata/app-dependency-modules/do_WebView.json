@@ -189,6 +189,21 @@
 		},
 		{
 			"Design":{
+				"Type":"Boolean",
+				"Data":[]
+			},
+			"DefaultValue":"true",
+			"Group":"",
+			"Type":"Bool",
+			"EditType":"1",
+			"Description":"仅iOS有效",
+			"Deprecated":false,
+			"Type_JavaScript":"Bool",
+			"ID":"scrollEnable",
+			"Name":"是否能滚动"
+		},
+		{
+			"Design":{
 				"Type":"Richtext",
 				"Data":[]
 			},
@@ -380,6 +395,27 @@
 			"ID":"setLoadingProgressColor",
 			"ReturnType":"",
 			"Name":"设置顶部进度条颜色",
+			"ReturnDesc":""
+		},
+		{
+			"ReturnType_JavaScript":"",
+			"Description":"",
+			"Deprecated":false,
+			"Paras":[
+				{
+					"DefaultValue":"",
+					"Type":"Node",
+					"Description":"",
+					"Required":1,
+					"Deprecated":false,
+					"Type_JavaScript":"Node",
+					"ID":"requestHeader",
+					"Name":"WebView请求的heade"
+				}
+			],
+			"ID":"setRequestHeader",
+			"ReturnType":"",
+			"Name":"设置WebView请求头",
 			"ReturnDesc":""
 		},
 		{

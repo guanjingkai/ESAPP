@@ -155,6 +155,11 @@ courseJoin.on("touch", function() {
 /** ******************************************************** */
 var videoPlayer = ui("player");
 var playButton = ui("play");
+var loading = ui("loading");
+var loadingBg = ui("loadingBg");
+loading.startGif("source://image/loading.gif",-1);
+var loadingTimer = mm("do_Timer");
+//videoPlayer.setControlVisible(false);
 /***********************************************************/
 playButton.on("touch",function(){
 	if(videoPlayer.isPlaying()){
@@ -166,8 +171,24 @@ playButton.on("touch",function(){
 	}
 });
 app.on("doPlayer",function(d){
-    deviceone.print(d);
-    videoPlayer.visible = true;
+	if(loadingTimer.isStart()){
+		
+	}else{
+		loading.visible = true;
+		loadingBg.visible = true;
+	    videoPlayer.visible = true;
+		loadingTimer.delay = 1000;
+		loadingTimer.interval = 50;
+		loadingTimer.on("tick", function() {
+			if(videoPlayer.isPlaying()){
+				loading.visible = false;
+				loadingBg.visible = false;
+			    loadingTimer.stop();
+			}
+		});
+		loadingTimer.start();
+	}
+	deviceone.print(d);
     videoPlayer.path = d;
     videoPlayer.play();
 });
