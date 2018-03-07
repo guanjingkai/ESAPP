@@ -142,6 +142,22 @@
 							}
 						],
 						"height":"88"
+					},
+					{
+						"path":"https://vod.chungold.com/5b5dc3bded484112a7ef6ce950f248f5/19a04a015e2c4d428efb9ef16c55c0ed-789eafd4d96a5882caf9d6d7c9abda51-hd.m3u8",
+						"visible":"false",
+						"width":"750",
+						"id":"player",
+						"type":"do_VideoView",
+						"height":"450"
+					},
+					{
+						"visible":"false",
+						"x":"316",
+						"y":"194",
+						"id":"play",
+						"text":"开始",
+						"type":"do_Button"
 					}
 				],
 				"height":"450"

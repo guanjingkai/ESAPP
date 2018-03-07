@@ -46,8 +46,9 @@ indexCourse.on("touch",function(d){
 	deviceone.print(JSON.stringify(d));
 	app.openPage({
 		source: "source://view/course/detail/courseDetial.ui",
-		statusBarState: "transparent",
-		statusBarFgColor:"white",
+		statusBarState: "show",
+    	statusBarFgColor:"white",
+    	statusBarBgColor:"FF3C62FF",
 		animationType:"slide_r2l",
 		data:{
 			course:indexCourseData.getOne({index:d}).id,

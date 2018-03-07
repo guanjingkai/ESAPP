@@ -25,6 +25,7 @@ var courseJoin = ui("course_join");
 var courseMask = ui("course_mask");
 var courseCover = ui("course_cover");
 var courseTab = ui("course_tab");
+var courseHeader = ui("course_header");
 var courseMain = ui("course_main");
 var btnClose = ui("btn_close");
 
@@ -151,7 +152,25 @@ courseJoin.on("touch", function() {
 	}
 	
 })
-
+/** ******************************************************** */
+var videoPlayer = ui("player");
+var playButton = ui("play");
+/***********************************************************/
+playButton.on("touch",function(){
+	if(videoPlayer.isPlaying()){
+		videoPlayer.pause();
+		playButton.text = "开始";
+	}else{
+		videoPlayer.resume();
+		playButton.text = "暂停";
+	}
+});
+app.on("doPlayer",function(d){
+    deviceone.print(d);
+    videoPlayer.visible = true;
+    videoPlayer.path = d;
+    videoPlayer.play();
+});
 /** ******************************************************** */
 page.on("back", function() {
 	app.closePage();
