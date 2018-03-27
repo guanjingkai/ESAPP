@@ -28,6 +28,7 @@ var courseTab = ui("course_tab");
 var courseHeader = ui("course_header");
 var courseMain = ui("course_main");
 var btnClose = ui("btn_close");
+var toolbarNobuy = ui("toolbar_nobuy");
 
 var courseTabData = mm("do_ListData");
 var courseMainData = mm("do_ListData");
@@ -39,11 +40,31 @@ if (data.course == "" || data.course == null || !data.hasOwnProperty("course")) 
 	courseSetID = data.course;
 	courseCover.source = data.cover;
 }
+/** loading******************************************************** */
 
+var loadingPageTimer = mm("do_Timer");
+
+var loadingPage = ui("loading_page");
+var loadingEnd = 0;
+
+app.on("closeLoadingPage",function(d){
+	loadingPageTimer.delay = 1000;
+	loadingPageTimer.interval = 1000;
+	loadingPageTimer.on("tick", function() {
+		if(loadingPage.visible == false){
+			loadingPageTimer.stop();
+			loadingPage.visible = false;
+		}
+		loadingPage.visible = false;
+	});
+	loadingPageTimer.start();
+	
+});
 /** 页面tab交互动画******************************************************** */
 btnClose.on("touch", function() {
 	app.closePage();
 });
+
 var change_tab = function(index) {
 	var data = [{template : 0,name : "介绍",fontColor : "C0C0C0FF",lb : false}, 
 	            {template : 0,name : "目录",fontColor : "C0C0C0FF",lb : false}, 
@@ -65,9 +86,23 @@ var getCourseInfo = function(courseSetID){
 				{template : 2,name : "评价",courseSetID : courseSetID}
 			]);
 			courseMain.bindItems(courseMainData);
+			//判断课程权限
+			if(courseInfo.access.code == "member.member_exist"){
+				toolbarNobuy.visible = false;
+				courseTabData.removeAll();
+				courseTabData.addData(change_tab(1));
+				courseTab.refreshItems();
+				courseMain.set({
+					index : 1
+				});
+			}else{
+				
+			}
 			courseMain.refreshItems();
 		})
+		app.fire("closeLoadingPage");
 	});
+	
 }
 getCourseInfo(courseSetID);
 courseTab.bindItems(courseTabData);
@@ -157,7 +192,6 @@ var videoPlayer = ui("player");
 var playButton = ui("play");
 var loading = ui("loading");
 var loadingBg = ui("loadingBg");
-loading.startGif("source://image/loading.gif",-1);
 var loadingTimer = mm("do_Timer");
 //videoPlayer.setControlVisible(false);
 /***********************************************************/
@@ -171,6 +205,7 @@ playButton.on("touch",function(){
 	}
 });
 app.on("doPlayer",function(d){
+	loading.startGif("source://image/loading2.gif",-1);
 	if(loadingTimer.isStart()){
 		
 	}else{

@@ -57,32 +57,3 @@ indexCourse.on("touch",function(d){
 		}
 	});
 })
-//http test
-//var apiName = "/api/discovery_columns";
-//http.resquestHttp('get',apiName,{},function(data){
-//	nf.alert(JSON.stringify(data));
-//});
-//var video_player = ui("video_player");
-//video_player.play(0);
-//var video_star = ui("video_star");
-//var video_time = 0;
-//video_player.setControlVisible(false);
-//video_player.on("touch",function(){	
-//	nf.alert(1);
-//}
-//video_star.on("touch",function(){	
-//	if(video_time == 0){
-//		video_player.play(0);
-//	}else{
-//		if (video_player.isPlaying()) {
-//			video_time = video_player.getCurrentPosition();
-//			video_player.pause();
-//		}else {
-//			video_player.resume();
-//		}
-//	}
-//	nf.alert(video_time);
-//});
-//videoPlayer.on("error",function(){
-//	nf.alert("123");
-//});

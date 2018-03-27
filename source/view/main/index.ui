@@ -2,7 +2,7 @@
 	"RootView":{
 		"bgColor":"FFFFFFFF",
 		"width":"750",
-		"id":"vvv",
+		"id":"main",
 		"type":"do_ALayout",
 		"views":[
 			{

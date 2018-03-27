@@ -39,12 +39,15 @@ var getCourseInfo = function(){
 	var apiName = "/api/course_set/"+courseID+"/courses";
 	http.get(apiName,{},function(data){
 		data = JSON.parse(data);
-		if(edusoho.isResponseError(data,apiName)){
+		if(edusoho.isResponseError(data,apiName) == "not_login"){
+			setMapping(data[0]);
+		}else if (edusoho.isResponseError(data,apiName)) {
 			setMapping(data[0]);
 		}
 	},{
 		accept:"v2"
 	});
+	//member.member_exist
 }
 var couponGrid = ui('coupon_grid');
 var couponGridData = mm("do_ListData");

@@ -11,6 +11,7 @@ var config	 = require("config/config");
 var http     = require("util/http");
 var edusoho  = require("util/edusoho");
 
+var nf = sm("do_Notification");
 var rootView = ui("$");
 var itemBox = ui("item_box");
 var lessonItem = ui("lesson_item");
@@ -19,6 +20,7 @@ var lessonNum = ui("lesson_num");
 var lessonTime = ui("lesson_time");
 var chapterItem = ui("chapter_item");
 var chapterTitle = ui("chapter_title");
+var lessonIcon = ui("lesson_icon");
 var chapterNum = ui("chapter_num");
 var itemBox = ui("item_box");
 var courseID = 0;
@@ -38,6 +40,14 @@ rootView.on("dataRefreshed",function(d){
 		lessonNum.text = "第"+d.number+"课";
 		lessonTime.text = getMS(d.task.length);
 		courseID = d.task.activity.id;
+		lessonIcon.source = "source://image/video_wait.png";
+		if(d.task.hasOwnProperty("result")){
+			if(d.task.result.status == "finish"){
+				lessonIcon.source = "source://image/video_finish.png";
+			}else if(d.task.result.status == "start"){
+				lessonIcon.source = "source://image/video_start.png";
+			}
+		}
 	}
 	
 })
@@ -51,31 +61,33 @@ var getMS = function(times){
 }
 itemBox.on("touch",function(){
 	//获取课程详情
-	var apiName = "/api/lessons/"+courseID;
-	http.get(apiName,{},function(data){
-		data = JSON.parse(data);
-		if(edusoho.isResponseError(data,apiName)){
-			Algorithm.md5('string', config.esplusKey + data.mediaUri, function(data, e) {
-				var apiName2 = "/video/info";
-				http.post(apiName2,{
-					id:courseID
-				},function(videoInfo){
-					videoInfo = JSON.parse(videoInfo);
-					var cover = videoInfo.data.VideoBase.CoverURL;
-					var m3u8url = "";
-					var maxheight = 0;
-					for(var i = 0; i < videoInfo.data.PlayInfoList.PlayInfo.length;i++){
-						if(videoInfo.data.PlayInfoList.PlayInfo[i].Height > maxheight){
-							m3u8url = videoInfo.data.PlayInfoList.PlayInfo[i].PlayURL;
+	if(courseID > 0){
+		var apiName = "/api/lessons/"+courseID;
+		http.get(apiName,{},function(data){
+			data = JSON.parse(data);
+			if(edusoho.isResponseError(data,apiName)){
+				Algorithm.md5('string', config.esplusKey + data.mediaUri, function(data, e) {
+					var apiName2 = "/video/info";
+					http.post(apiName2,{
+						id:courseID
+					},function(videoInfo){
+						videoInfo = JSON.parse(videoInfo);
+						var cover = videoInfo.data.VideoBase.CoverURL;
+						var m3u8url = "";
+						var maxheight = 0;
+						for(var i = 0; i < videoInfo.data.PlayInfoList.PlayInfo.length;i++){
+							if(videoInfo.data.PlayInfoList.PlayInfo[i].Height > maxheight){
+								m3u8url = videoInfo.data.PlayInfoList.PlayInfo[i].PlayURL;
+							}
 						}
-					}
-					app.fire("doPlayer",m3u8url);
-				},{
-					server:"esp"
+						app.fire("doPlayer",m3u8url);
+					},{
+						server:"esp"
+					});
 				});
-			});
-		}
-	},{
-		token:true
-	});
+			}
+		},{
+			token:true
+		});
+	}
 });
