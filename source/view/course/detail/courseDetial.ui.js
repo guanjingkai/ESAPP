@@ -27,9 +27,14 @@ var courseCover = ui("course_cover");
 var courseTab = ui("course_tab");
 var courseHeader = ui("course_header");
 var courseMain = ui("course_main");
+var coursePrice = ui("course_price");
 var btnClose = ui("btn_close");
 var toolbarNobuy = ui("toolbar_nobuy");
-
+var topShare = ui("top_share");
+var topDownload = ui("top_download");
+var toolbarLine = ui("toolbar_line");
+var toolbarLine2 = ui("toolbar_line2");
+var toolbarStar = ui("toolbar_star");
 var courseTabData = mm("do_ListData");
 var courseMainData = mm("do_ListData");
 
@@ -49,7 +54,7 @@ var loadingEnd = 0;
 
 app.on("closeLoadingPage",function(d){
 	loadingPageTimer.delay = 1000;
-	loadingPageTimer.interval = 1000;
+	loadingPageTimer.interval = 100;
 	loadingPageTimer.on("tick", function() {
 		if(loadingPage.visible == false){
 			loadingPageTimer.stop();
@@ -79,6 +84,22 @@ var getCourseInfo = function(courseSetID){
 	course.getCourseSetDetail(courseSetID,function(courseSetDetail){
 		courseID = courseSetDetail[0].id;//不考虑多计划
 		courseInfo = courseSetDetail[0];
+		if(courseInfo.price > 0){
+			coursePrice.fontColor = "FF3C62FF";
+			courseJoin.bgColor = "FF3C62FF";
+			toolbarLine.bgColor = "FFCDD7FF";
+			toolbarLine2.bgColor = "FFCDD7FF";
+			toolbarStar.iconColor = "FF3C62FF";
+			coursePrice.text = "￥"+courseInfo.price;
+		}else{
+			coursePrice.text = "免费课程";
+			courseJoin.bgColor = "5FD584FF";
+			coursePrice.fontColor = "5FD584FF";
+			toolbarLine2.bgColor = "AAEABEFF";
+			toolbarLine.bgColor = "AAEABEFF";
+			toolbarStar.iconColor = "5FD584FF";
+		}
+		
 		course.getCourseItem(courseID,function(courseItem) {
 			courseMainData.addData([
 			    {template : 0,name : "介绍",courseSetID : courseSetID,courseInfo:courseInfo},
@@ -88,7 +109,8 @@ var getCourseInfo = function(courseSetID){
 			courseMain.bindItems(courseMainData);
 			//判断课程权限
 			if(courseInfo.access.code == "member.member_exist"){
-				toolbarNobuy.visible = false;
+				topDownload.visible = true;
+				topShare.visible = false;
 				courseTabData.removeAll();
 				courseTabData.addData(change_tab(1));
 				courseTab.refreshItems();
@@ -96,7 +118,7 @@ var getCourseInfo = function(courseSetID){
 					index : 1
 				});
 			}else{
-				
+				toolbarNobuy.visible = true;
 			}
 			courseMain.refreshItems();
 		})

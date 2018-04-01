@@ -95,5 +95,7 @@ btnLogin.on("touch",function(){
 			page.fire("closeLoginUi");
 			app.fire("refreshUser");
 		}
-	},"");
+	},{
+		cache:0
+	});
 });

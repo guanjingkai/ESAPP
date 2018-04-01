@@ -24,6 +24,7 @@
 				"y":"16",
 				"id":"course_image",
 				"type":"do_ImageView",
+				"cacheType":"always",
 				"height":"154"
 			},
 			{

@@ -10,7 +10,7 @@ module.exports.post = post;
 module.exports.get = get;
 module.exports.resquestHttp = resquestHttp;
 
-function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
+function resquestHttp(httpMethod,apiName,bodyData,callBack,thisConfig) {
 	var http = d.mm("do_Http");
 	var token = null;
 	if(thisConfig == "" || thisConfig == null){
@@ -44,25 +44,59 @@ function resquestHttp(httpMethod,apiName,data,callBack,thisConfig) {
 	}
 	http.setRequestHeader("Accept-Encoding","gzip");
 	http.setRequestHeader("User-Agent","okhttp/3.8.0");
-	
-	
 	http.method            = httpMethod;
 	http.url               = getUrl(serverUrl,apiName);
-	http.body              = formatHttpBody(data);
+	http.body              = formatHttpBody(bodyData);
 	http.contentType       = thisConfig.httpContentType;
 	http.responseEncoding  = thisConfig.httpResponseEncoding;
 	http.timeout           = thisConfig.httpTimeout;
 	
-	http.request();
-	http.on("result", function(data) {
-		if(data.error){
-			//todo
-		}else{
-			callBack(data.data);
+	//是否缓存
+	if(!datacache.hasData(apiName+JSON.stringify(bodyData)) || (thisConfig.hasOwnProperty("cache") && thisConfig['cache'] == 0)){
+		//nf.alert("无缓存");
+		http.request();
+		http.on("result", function(data) {
+			if(data.error){
+				//todo
+			}else{
+				datacache.saveData(apiName+JSON.stringify(bodyData),{
+					time:new Date().getTime(),
+					data:data.data
+				});
+				callBack(data.data);
+			}
+		}).on("fail",function(data){
+			//nf.alert("请求失败了"+JSON.stringify(data));
+		});	
+	}
+	else
+	{
+		if(!thisConfig.hasOwnProperty("cache")){
+			thisConfig['cache'] = 3600 * 1000;
 		}
-	}).on("fail",function(data){
-		//nf.alert("请求失败了"+JSON.stringify(data));
-	});	
+		if(datacache.hasData(apiName+JSON.stringify(bodyData)) && datacache.loadData(apiName+JSON.stringify(bodyData)).time+thisConfig['cache'] > new Date().getTime()){
+			//nf.alert("有缓存未超时");
+			callBack(datacache.loadData(apiName+JSON.stringify(bodyData)).data);
+		}else{
+			//nf.alert("有缓存超时了");
+			nf.alert(datacache.loadData(apiName+JSON.stringify(bodyData)).time+thisConfig['cache'] );
+			nf.alert(new Date().getTime() );
+			http.request();
+			http.on("result", function(data) {
+				if(data.error){
+					//todo
+				}else{
+					datacache.saveData(apiName+JSON.stringify(bodyData),{
+						time:new Date().getTime(),
+						data:data.data
+					});
+					callBack(data.data);
+				}
+			}).on("fail",function(data){
+				//nf.alert("请求失败了"+JSON.stringify(data));
+			});	
+		}
+	}
 }
 function post(apiName,data,callBack,thisConfig) {
 	resquestHttp('post',apiName,data,callBack,thisConfig);

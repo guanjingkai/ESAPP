@@ -13,6 +13,7 @@
 				"scale":"centercrop",
 				"id":"course_image",
 				"type":"do_ImageView",
+				"cacheType":"always",
 				"height":"210"
 			},
 			{

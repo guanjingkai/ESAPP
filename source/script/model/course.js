@@ -23,14 +23,16 @@ function getCourseSetDetail (courseSetID,callBack) {
 					callBack(data);
 				}
 			}, {
-				accept : "v2"
+				accept : "v2",
+				cache:0
 			});
 		}else if (edusoho.isResponseError(data,apiName)) {
 			callBack(data);
 		}
 	}, {
 		accept : "v2",
-		token:true
+		token:true,
+		cache:0
 	});
 }
 function getCourseItem (courseID,callback){
@@ -42,6 +44,7 @@ function getCourseItem (courseID,callback){
 		}
 	},{
 		accept:"v2",
-		token:true
+		token:true,
+		cache:0
 	});
 }

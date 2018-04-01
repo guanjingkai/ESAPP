@@ -9,6 +9,7 @@
 				"width":"750",
 				"id":"banner_image",
 				"type":"do_ImageView",
+				"cacheType":"always",
 				"height":"420"
 			}
 		],

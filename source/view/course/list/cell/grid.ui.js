@@ -23,7 +23,7 @@ rootView.on("dataRefreshed",function(d){
 		coursePrice.fontColor = "FF3C62FF";
 	}else{
 		coursePrice.text = "免费";
-		coursePrice.fontColor = "37ECBBFF";
+		coursePrice.fontColor = "5FD584FF";
 	}
 })
 var getMS = function(times){

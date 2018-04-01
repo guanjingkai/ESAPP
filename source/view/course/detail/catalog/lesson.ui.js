@@ -42,10 +42,12 @@ rootView.on("dataRefreshed",function(d){
 		courseID = d.task.activity.id;
 		lessonIcon.source = "source://image/video_wait.png";
 		if(d.task.hasOwnProperty("result")){
-			if(d.task.result.status == "finish"){
-				lessonIcon.source = "source://image/video_finish.png";
-			}else if(d.task.result.status == "start"){
-				lessonIcon.source = "source://image/video_start.png";
+			if(d.task.result.hasOwnProperty("status")){
+				if(d.task.result.status == "finish"){
+					lessonIcon.source = "source://image/video_finish.png";
+				}else if(d.task.result.status == "start"){
+					lessonIcon.source = "source://image/video_start.png";
+				}
 			}
 		}
 	}
@@ -80,6 +82,8 @@ itemBox.on("touch",function(){
 								m3u8url = videoInfo.data.PlayInfoList.PlayInfo[i].PlayURL;
 							}
 						}
+						//下载m3u8
+						
 						app.fire("doPlayer",m3u8url);
 					},{
 						server:"esp"

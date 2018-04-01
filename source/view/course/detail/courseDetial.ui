@@ -15,6 +15,7 @@
 				"height":"804"
 			},
 			{
+				"visible":"false",
 				"bgColor":"FFFFFFFF",
 				"width":"750",
 				"y":"1246",
@@ -34,14 +35,14 @@
 								"y":"16",
 								"iconSize":"56",
 								"iconCode":"ebe8",
-								"id":"do_IconFont_1",
+								"id":"toolbar_star",
 								"type":"do_IconFont",
 								"height":"56"
 							},
 							{
 								"bgColor":"FFCDD7FF",
 								"width":"1",
-								"id":"do_ALayout_9",
+								"id":"toolbar_line2",
 								"type":"do_ALayout",
 								"height":"100"
 							}
@@ -55,11 +56,11 @@
 						"views":[
 							{
 								"x":"18",
-								"width":"129",
+								"width":"178",
 								"y":"2",
 								"fontSize":"32",
 								"id":"course_price",
-								"text":"￥48.00",
+								"text":"Loading...",
 								"type":"do_Label",
 								"fontColor":"FF3C62FF",
 								"height":"43"
@@ -90,7 +91,7 @@
 					{
 						"bgColor":"FFCDD7FF",
 						"width":"750",
-						"id":"do_ALayout_7",
+						"id":"toolbar_line",
 						"type":"do_ALayout",
 						"height":"1"
 					},
@@ -128,20 +129,8 @@
 						"height":"450"
 					},
 					{
-						"iconName":"iconfont",
-						"x":"676",
-						"width":"56",
-						"iconColor":"FFFFFFFF",
-						"y":"42",
-						"iconSize":"56",
-						"iconCode":"eb92",
-						"id":"do_IconFont_3",
-						"type":"do_IconFont",
-						"height":"56"
-					},
-					{
 						"width":"88",
-						"y":"44",
+						"y":"20",
 						"id":"btn_close",
 						"type":"do_ALayout",
 						"views":[
@@ -152,7 +141,7 @@
 								"x":"16",
 								"iconSize":"56",
 								"y":"16",
-								"iconCode":"e779",
+								"iconCode":"e660",
 								"id":"do_IconFont_4",
 								"type":"do_IconFont",
 								"height":"56"
@@ -190,6 +179,51 @@
 						"id":"play",
 						"text":"开始",
 						"type":"do_Button"
+					},
+					{
+						"x":"662",
+						"width":"88",
+						"y":"20",
+						"id":"top_share",
+						"type":"do_ALayout",
+						"views":[
+							{
+								"iconName":"iconfont",
+								"width":"56",
+								"iconColor":"FFFFFFFF",
+								"x":"16",
+								"iconSize":"56",
+								"y":"16",
+								"iconCode":"eb92",
+								"id":"do_IconFont_3",
+								"type":"do_IconFont",
+								"height":"56"
+							}
+						],
+						"height":"88"
+					},
+					{
+						"visible":"false",
+						"x":"662",
+						"width":"88",
+						"y":"20",
+						"id":"top_download",
+						"type":"do_ALayout",
+						"views":[
+							{
+								"iconName":"iconfont",
+								"width":"56",
+								"iconColor":"FFFFFFFF",
+								"x":"16",
+								"iconSize":"56",
+								"y":"16",
+								"iconCode":"e838",
+								"id":"do_IconFont_6",
+								"type":"do_IconFont",
+								"height":"56"
+							}
+						],
+						"height":"88"
 					}
 				],
 				"height":"450"
@@ -217,6 +251,7 @@
 				"height":"470"
 			},
 			{
+				"visible":"false",
 				"bgColor":"FFFFFFFF",
 				"x":"0",
 				"width":"750",
@@ -225,14 +260,14 @@
 				"type":"do_ALayout",
 				"views":[
 					{
-						"x":"275",
-						"width":"200",
+						"x":"300",
+						"width":"150",
 						"y":"478",
 						"scale":"fillxory",
 						"id":"do_ImageView_4",
 						"source":"source://image/loading.png",
 						"type":"do_ImageView",
-						"height":"200",
+						"height":"150",
 						"animation":"fade"
 					}
 				],

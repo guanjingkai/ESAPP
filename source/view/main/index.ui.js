@@ -7,6 +7,7 @@ var http     = require("util/http");
 var edusoho  = require("util/edusoho");
 
 var bannerView = ui('banner_view');
+var sobot = ui('sobot');
 var bannerViewData = mm("do_ListData");
 var indexCourse = ui('index_course');
 var indexCourseData = mm("do_ListData");
@@ -55,5 +56,15 @@ indexCourse.on("touch",function(d){
 			cover:indexCourseData.getOne({index:d}).cover.large,
 			minCoursePrice:indexCourseData.getOne({index:d}).minCoursePrice
 		}
+	});
+})
+sobot.on("touch",function(d){
+	deviceone.print(JSON.stringify(d));
+	app.openPage({
+		source: "source://view/common/sobot.ui",
+		statusBarState: "show",
+    	statusBarFgColor:"white",
+    	statusBarBgColor:"FF3C62FF",
+		animationType:"slide_r2l"
 	});
 })

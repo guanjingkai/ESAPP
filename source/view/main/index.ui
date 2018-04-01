@@ -23,6 +23,28 @@
 						"type":"do_Label",
 						"fontColor":"FFFFFFFF",
 						"height":"42"
+					},
+					{
+						"x":"662",
+						"width":"88",
+						"id":"sobot",
+						"type":"do_ALayout",
+						"views":[
+							{
+								"bgColor":"FFFFFF00",
+								"iconName":"iconfont",
+								"width":"48",
+								"iconColor":"FFFFFFFF",
+								"x":"20",
+								"iconSize":"48",
+								"y":"20",
+								"iconCode":"eb51",
+								"id":"",
+								"type":"do_IconFont",
+								"height":"48"
+							}
+						],
+						"height":"88"
 					}
 				],
 				"height":"88"
