@@ -21,6 +21,7 @@ var course = require("model/course");
 var courseSetID = "";
 var courseID = "";
 var courseInfo = {};
+var courseItem = [];
 var courseJoin = ui("course_join");
 var courseMask = ui("course_mask");
 var courseCover = ui("course_cover");
@@ -100,7 +101,8 @@ var getCourseInfo = function(courseSetID){
 			toolbarStar.iconColor = "5FD584FF";
 		}
 		
-		course.getCourseItem(courseID,function(courseItem) {
+		course.getCourseItem(courseID,function(itemData) {
+			courseItem = itemData;
 			courseMainData.addData([
 			    {template : 0,name : "介绍",courseSetID : courseSetID,courseInfo:courseInfo},
 				{template : 1,name : "目录",itemData : courseItem}, 
@@ -209,6 +211,22 @@ courseJoin.on("touch", function() {
 	}
 	
 })
+topDownload.on("touch",function(){
+	app.openPage({
+    	source: "source://view/course/cache/courseCache.ui",
+    	statusBarState: "show",
+    	statusBarFgColor:"white",
+    	statusBarBgColor:"FF3C62FF",
+    	animationType:"slide_b2t",
+    	data:{
+    		targetType:"course",
+    		courseID:courseID,
+			courseSetID:courseSetID,
+			cover : courseInfo.courseSet.cover,
+			itemData : courseItem
+    	}
+    });
+});
 /** ******************************************************** */
 var videoPlayer = ui("player");
 var playButton = ui("play");
