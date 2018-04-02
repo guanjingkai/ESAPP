@@ -79,8 +79,8 @@ function resquestHttp(httpMethod,apiName,bodyData,callBack,thisConfig) {
 			callBack(datacache.loadData(apiName+JSON.stringify(bodyData)).data);
 		}else{
 			//nf.alert("有缓存超时了");
-			nf.alert(datacache.loadData(apiName+JSON.stringify(bodyData)).time+thisConfig['cache'] );
-			nf.alert(new Date().getTime() );
+			//nf.alert(datacache.loadData(apiName+JSON.stringify(bodyData)).time+thisConfig['cache'] );
+			//nf.alert(new Date().getTime() );
 			http.request();
 			http.on("result", function(data) {
 				if(data.error){
