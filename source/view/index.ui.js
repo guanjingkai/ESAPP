@@ -1,12 +1,38 @@
-var app, page, nf, InitData;
-nf = sm("do_Notification");
-app = sm("do_App");
-page = sm("do_Page");
-InitData = sm("do_InitData")
-dataCache = sm("do_DataCache")
+var nf = sm("do_Notification");
+var app = sm("do_App");
+var page = sm("do_Page");
+var InitData = sm("do_InitData");
+var dataCache = sm("do_DataCache");
+
+var config	 = require("config/config");
+var http     = require("util/http");
+var edusoho  = require("util/edusoho");
 /*********************************************************/
+if(!dataCache.hasData("videoCache")){
+	var videoCache = {
+			videoNum:0,
+			videoSize:0,
+			videoData:[]
+	}
+	dataCache.saveData("videoCache",videoCache);
+}
+if(!dataCache.hasData("articleCategory")){
+	var articleCategory = [];
+	dataCache.saveData("articleCategory",articleCategory);
+}
+/*********************************************************/
+var apiName = "/article/category";
+http.get(apiName,{},function(data){
+	data = JSON.parse(data);
+	dataCache.saveData("articleCategory",data);
+},{
+	server:"esp"
+});
 //dataCache.removeAll("data://videoPlayer.html");
 //InitData.copyFile("initdata://videoPlayer.html","data://videoPlayer.html", function(data, e) {})
+
+/*********************************************************/
+
 var main_shower = ui("main_shower");
 
 var tabbarIndex = ui("index");

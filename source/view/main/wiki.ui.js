@@ -1,7 +1,7 @@
 var nf       = sm("do_Notification");
 var app      = sm("do_App");
 var page     = sm("do_Page");
-
+var dataCache = sm("do_DataCache");
 var config	 = require("util/config");
 //http test
 
@@ -17,32 +17,36 @@ wiki_view.bindItems(wiki_view_listdata);
 /***********************************************************/
 //segmentview数据
 var wiki_data = [
-              {template: 0,name: "首页", fontColor : "C0C0C0FF", lb:false},
-           	  {template: 0,name: "Wiki", fontColor : "C0C0C0FF", lb:false},
-           	  {template: 0,name: "UI设计", fontColor : "C0C0C0FF", lb:false},
-           	  {template: 0,name: "产品PM", fontColor : "C0C0C0FF", lb:false},
-           	  {template: 0,name: "交互UX", fontColor : "C0C0C0FF", lb:false},
-           	  {template: 0,name: "动效UE", fontColor : "C0C0C0FF", lb:false},
-              {template: 0,name: "前端", fontColor : "C0C0C0FF", lb:false}
+              {template: 0,name: "首页", fontColor : "FFB2C1FF", lb:false},
+           	  {template: 0,name: "Wiki", fontColor : "FFB2C1FF", lb:false}
 ];
 //slideview数据
 var wiki_view_data = [
 	{template: 0,name: "首页"},
-	{template: 0,name: "Wiki"},
-	{template: 0,name: "UI设计"},
-	{template: 0,name: "产品PM"},
-	{template: 0,name: "交互UX"},
-	{template: 0,name: "动效UE"},
-	{template: 0,name: "前端"}                      
+	{template: 0,name: "Wiki"}                   
 ];
-
+/***********************************************************/
+var articleCategory = dataCache.loadData("articleCategory")
+articleCategory.forEach(function(v,k) { 
+    //nf.alert(v); //这样就会分别将name遍历出来
+	wiki_data.push({
+    	template: 0,
+    	name:v.name,
+    	fontColor:"FFB2C1FF",
+    	lb:false
+    });
+	wiki_view_data.push({
+    	template: 0,
+    	name:v.name
+    });
+});
 /***********************************************************/
 var change_tab = function(index){
 	for(var item in wiki_data){
-		wiki_data[item].fontColor = "C0C0C0FF",
+		wiki_data[item].fontColor = "FFB2C1FF",
 		wiki_data[item].lb = false;
 	}
-	wiki_data[index].fontColor = "FF3C62FF";
+	wiki_data[index].fontColor = "FFFFFFFF";
 	wiki_data[index].lb = true;
 	return wiki_data;	
 }

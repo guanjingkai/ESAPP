@@ -53,12 +53,14 @@
 						"height":"100"
 					},
 					{
-						"y":"36",
-						"scale":"fillxory",
-						"id":"lesson_icon",
-						"source":"source://image/video_wait.png",
-						"type":"do_ImageView",
-						"height":"28"
+						"border":"000000ff,22,[22,22,22,22]",
+						"bgColor":"000000FF",
+						"x":"28",
+						"width":"44",
+						"y":"28",
+						"id":"do_ALayout_1",
+						"type":"do_ALayout",
+						"height":"44"
 					}
 				],
 				"height":"100"

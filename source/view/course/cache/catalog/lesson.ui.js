@@ -40,13 +40,13 @@ rootView.on("dataRefreshed",function(d){
 		lessonNum.text = "第"+d.number+"课";
 		lessonTime.text = getMS(d.task.length);
 		courseID = d.task.activity.id;
-		lessonIcon.source = "source://image/video_wait.png";
+		//lessonIcon.source = "source://image/video_wait.png";
 		if(d.task.hasOwnProperty("result")){
 			if(d.task.result.hasOwnProperty("status")){
 				if(d.task.result.status == "finish"){
-					lessonIcon.source = "source://image/video_finish.png";
+					//lessonIcon.source = "source://image/video_finish.png";
 				}else if(d.task.result.status == "start"){
-					lessonIcon.source = "source://image/video_start.png";
+					//lessonIcon.source = "source://image/video_start.png";
 				}
 			}
 		}

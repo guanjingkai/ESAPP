@@ -1,33 +1,38 @@
 {
 	"RootView":{
-		"width":"160",
+		"width":"140",
 		"id":"AlayoutRoot",
 		"type":"do_ALayout",
 		"views":[
 			{
-				"width":"160",
+				"bgColor":"FF3C62FF",
+				"width":"140",
 				"id":"do_alayout_1",
 				"type":"do_ALayout",
 				"views":[
 					{
 						"textAlign":"center",
-						"width":"160",
+						"width":"140",
 						"fontSize":"30",
 						"id":"product_title",
 						"type":"do_Label",
-						"height":"77"
+						"fontColor":"FFB2C1FF",
+						"height":"88"
 					},
 					{
-						"bgColor":"FF3C62FF",
-						"width":"160",
-						"y":"77",
+						"bgColor":"FFFFFFFF",
+						"width":"80",
+						"x":"30",
+						"y":"84",
 						"fontSize":"30",
 						"id":"lb",
 						"type":"do_Label",
-						"height":"3"
+						"height":"4"
 					}
-				]
+				],
+				"height":"88"
 			}
-		]
+		],
+		"height":"88"
 	}
 }

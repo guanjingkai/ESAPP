@@ -120,7 +120,7 @@
 										"y":"68",
 										"fontSize":"20",
 										"id":"tabbar_sns_label",
-										"text":"社区",
+										"text":"会员",
 										"type":"do_Label",
 										"fontColor":"C0C0C0FF",
 										"height":"24"
@@ -133,7 +133,7 @@
 										"iconColor":"C0C0C0FF",
 										"y":"12",
 										"iconSize":"50",
-										"iconCode":"ea24",
+										"iconCode":"e81a",
 										"id":"tabbar_sns_icon",
 										"type":"do_IconFont",
 										"height":"50"
