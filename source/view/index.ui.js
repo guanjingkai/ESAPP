@@ -22,7 +22,7 @@ if(!dataCache.hasData("articleCategory")){
 }
 /*********************************************************/
 var apiName = "/article/category";
-http.get(apiName,{},function(data){
+http.post(apiName,{},function(data){
 	data = JSON.parse(data);
 	dataCache.saveData("articleCategory",data);
 },{

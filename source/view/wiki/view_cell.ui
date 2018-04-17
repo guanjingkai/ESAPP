@@ -6,14 +6,11 @@
 		"type":"do_ALayout",
 		"views":[
 			{
-				"textAlign":"center",
-				"x":"197",
-				"width":"340",
-				"y":"74",
-				"fontSize":"50",
-				"id":"do_Label_1",
-				"type":"do_Label",
-				"height":"428"
+				"templates":"source://view/wiki/cell/article.ui",
+				"width":"750",
+				"id":"wiki_list",
+				"type":"do_ListView",
+				"height":"-1"
 			}
 		],
 		"height":"1068"

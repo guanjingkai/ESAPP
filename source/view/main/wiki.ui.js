@@ -17,13 +17,13 @@ wiki_view.bindItems(wiki_view_listdata);
 /***********************************************************/
 //segmentview数据
 var wiki_data = [
-              {template: 0,name: "首页", fontColor : "FFB2C1FF", lb:false},
-           	  {template: 0,name: "Wiki", fontColor : "FFB2C1FF", lb:false}
+              {template: 0,name: "首页",id:0,fontColor : "FFB2C1FF", lb:false},
+           	  {template: 0,name: "Wiki",id:9999,fontColor : "FFB2C1FF", lb:false}
 ];
 //slideview数据
 var wiki_view_data = [
-	{template: 0,name: "首页"},
-	{template: 0,name: "Wiki"}                   
+	{template: 0,name: "首页",id:0},
+	{template: 0,name: "Wiki",id:9999}                   
 ];
 /***********************************************************/
 var articleCategory = dataCache.loadData("articleCategory")
@@ -32,12 +32,14 @@ articleCategory.forEach(function(v,k) {
 	wiki_data.push({
     	template: 0,
     	name:v.name,
+    	id:v.id,
     	fontColor:"FFB2C1FF",
     	lb:false
     });
 	wiki_view_data.push({
     	template: 0,
-    	name:v.name
+    	name:v.name,
+    	id:v.id
     });
 });
 /***********************************************************/
