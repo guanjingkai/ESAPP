@@ -52,6 +52,7 @@ function resquestHttp(httpMethod,apiName,bodyData,callBack,thisConfig) {
 	http.timeout           = thisConfig.httpTimeout;
 	
 	//是否缓存
+
 	if(!datacache.hasData(apiName+JSON.stringify(bodyData)) || (thisConfig.hasOwnProperty("cache") && thisConfig['cache'] == 0)){
 		//nf.alert("无缓存");
 		http.request();
@@ -76,6 +77,8 @@ function resquestHttp(httpMethod,apiName,bodyData,callBack,thisConfig) {
 		}
 		if(datacache.hasData(apiName+JSON.stringify(bodyData)) && datacache.loadData(apiName+JSON.stringify(bodyData)).time+thisConfig['cache'] > new Date().getTime()){
 			//nf.alert("有缓存未超时");
+			//nf.alert(apiName+JSON.stringify(bodyData));
+			//nf.alert(datacache.loadData(apiName+JSON.stringify(bodyData)).data);
 			callBack(datacache.loadData(apiName+JSON.stringify(bodyData)).data);
 		}else{
 			//nf.alert("有缓存超时了");
@@ -98,13 +101,6 @@ function resquestHttp(httpMethod,apiName,bodyData,callBack,thisConfig) {
 		}
 	}
 }
-function post(apiName,data,callBack,thisConfig) {
-	resquestHttp('post',apiName,data,callBack,thisConfig);
-}
-function get(apiName,data,callBack,thisConfig) {
-
-	resquestHttp('get',apiName,data,callBack,thisConfig);
-}
 function formatHttpBody(jsonData){
 	var bodyData = "";
 	if(config.httpContentType == "application/x-www-form-urlencoded"){
@@ -123,4 +119,12 @@ function getUrl(serivceUrl,apiName){
 	}else{
 		return serivceUrl+apiName;
 	}
+}
+
+
+function post(apiName,data,callBack,thisConfig) {
+	resquestHttp('post',apiName,data,callBack,thisConfig);
+}
+function get(apiName,data,callBack,thisConfig) {
+	resquestHttp('get',apiName,data,callBack,thisConfig);
 }

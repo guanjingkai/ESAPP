@@ -24,10 +24,14 @@ var rootView = ui("$");
 var catalogData = mm("do_ListData");
 var catalogList = ui("catalog_list");
 var data = page.getData();
+var courseID = data.courseID;
 var setMapping = function(data){
     catalogData.addData(data);
     catalogList.refreshItems();
 }
 catalogList.bindItems(catalogData);
 itemData = data.itemData;
+for(var i = 0; i < itemData.length; i++){
+	itemData[i].courseID = courseID;
+}
 setMapping(itemData);

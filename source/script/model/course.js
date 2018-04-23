@@ -10,6 +10,7 @@ var config = require("config/config");
 var dataCache = d.sm("do_DataCache");
 module.exports.getCourseSetDetail = getCourseSetDetail;
 module.exports.getCourseItem = getCourseItem;
+module.exports.cacheVideo = cacheVideo;
 
 function getCourseSetDetail (courseSetID,callBack) {
 	var apiName = "/api/course_sets/" + courseSetID + "/courses";
@@ -56,8 +57,32 @@ function cacheVideo(courseID,taskID,m3u8Url,callback){
 				videoSize:0,
 				videoData:[]
 		}
-	}else{
-		var cacheVideo = dataCache.loadData("videoCache");
-		cacheVideo.videoData[courseID][taskID].m3u8Url = m3u8Url;
+		dataCache.saveData("videoCache",videoCache);
 	}
+	var cacheVideo = dataCache.loadData("videoCache");
+	cacheVideo.videoData[courseID][taskID].m3u8Url = m3u8Url;
+	var downloadId = "video|"+courseID+"|"+taskID;
+	var reg1=new RegExp("[0-9a-zA-z-]*.m3u8");
+	var fileName = reg1.exec(m3u8Url);
+	var path = "data://videoCache/"+courseID+"/"+taskID+"/fileName";
+	nf.alert(path);
+	deviceone.print(path);
+	download(m3u8Url,path,downloadId, function(data) {
+		nf.alert(data);
+	})
+}
+
+function download(url,path,downloadId,callBack){
+	var http = d.mm("do_Http");
+	http.url = url;
+	http.download1(path, downloadId, isBreakpoint);
+	http.on("result", function(data) {
+		if(data.error){
+			//todo
+		}else{
+			callBack(data.data);
+		}
+	}).on("fail",function(data){
+		//nf.alert("请求失败了"+JSON.stringify(data));
+	});
 }

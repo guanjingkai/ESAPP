@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html id="main" style="height: 100%;">
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+
+	</head>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		body {
+			position: relative;
+		}
+		
+		.prism-player {
+			overflow: hidden;
+		}
+		
+		#dplayer {
+			position: absolute;
+		}
+		
+		.o90 {
+			-webkit-transform: rotate(90deg);
+			-webkit-transform-origin: 50% 50%;
+		}
+		
+		video {
+			height: 100%;
+			width: 100%;
+		}
+	</style>
+
+	<body style="height: 100%;">
+		<div id="dplayer" class="" style="width: 100%;height: 100%;"></div>
+		<script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+		<script>
+			var mplayer = document.getElementById("dplayer"); /*w和h都要用这部分，故单独定义一个div*/
+			var main = document.getElementById("main");
+
+			const dp = new DPlayer({
+				container: document.getElementById('dplayer'),
+				autoplay: true,
+				screenshot: true,
+				video: {
+					quality: [{
+						name: '阿里云高清线路',
+						url: 'https://hls.chungold.com/5eda3dbe2bcc4ba09e6ee51791bfdee2/3d5ef33d15f248cd83dd30696bb04c7a-e5f641c803ee3129dadab6ca54dd251d-hd.m3u8?auth_key=1524161829-761b24d7601b4103a1d4aacb9d4be738-0-931ab779e6b68541f4cd8782dfbf4210',
+						type: 'hls'
+					}, ],
+					defaultQuality: 0
+				}
+			});
+			dp.on('fullscreen', function() {
+				var hh = document.body.clientHeight + "px";
+				var ww = document.body.clientWidth + "px";
+				main.style.width = ww;
+				main.style.height = hh;
+				mplayer.style.width = hh;
+				mplayer.style.height = ww;
+				mplayer.classList.add("o90");
+			});
+			dp.on('fullscreen_cancel', function() {
+				var hh = document.body.clientHeight + "px";
+				var ww = document.body.clientWidth + "px";
+				main.style.width = ww;
+				main.style.height = hh;
+				mplayer.style.width = ww;
+				mplayer.style.height = hh;
+				mplayer.classList.remove("o90");
+			});
+		</script>
+	</body>
+
+</html>

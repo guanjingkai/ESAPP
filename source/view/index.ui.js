@@ -26,10 +26,11 @@ http.post(apiName,{},function(data){
 	data = JSON.parse(data);
 	dataCache.saveData("articleCategory",data);
 },{
-	server:"esp"
+	server:"esp",
+	cache:0
 });
-//dataCache.removeAll("data://videoPlayer.html");
-//InitData.copyFile("initdata://videoPlayer.html","data://videoPlayer.html", function(data, e) {})
+dataCache.removeAll("data://player.html");
+InitData.copyFile("initdata://player.html","data://player.html", function(data, e) {})
 
 /*********************************************************/
 

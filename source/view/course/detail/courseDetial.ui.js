@@ -244,7 +244,7 @@ playButton.on("touch",function(){
 		playButton.text = "暂停";
 	}
 });
-app.on("doPlayer",function(d){
+app.on("playerLoading",function(){
 	loading.startGif("source://image/loading2.gif",-1);
 	if(loadingTimer.isStart()){
 		
@@ -263,6 +263,8 @@ app.on("doPlayer",function(d){
 		});
 		loadingTimer.start();
 	}
+});
+app.on("doPlayer",function(d){
 	deviceone.print(d);
     videoPlayer.path = d;
     videoPlayer.play();

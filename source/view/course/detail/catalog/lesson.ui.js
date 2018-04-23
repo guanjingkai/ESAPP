@@ -62,6 +62,7 @@ var getMS = function(times){
 	return mm+":"+ss;
 }
 itemBox.on("touch",function(){
+	app.fire("playerLoading");
 	//获取课程详情
 	if(courseID > 0){
 		var apiName = "/api/lessons/"+courseID;
