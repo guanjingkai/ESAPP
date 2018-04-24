@@ -60,11 +60,13 @@ function cacheVideo(courseID,taskID,m3u8Url,callback){
 		dataCache.saveData("videoCache",videoCache);
 	}
 	var cacheVideo = dataCache.loadData("videoCache");
+	cacheVideo.videoData[courseID] = [];
+	cacheVideo.videoData[courseID][taskID] = [];
 	cacheVideo.videoData[courseID][taskID].m3u8Url = m3u8Url;
 	var downloadId = "video|"+courseID+"|"+taskID;
 	var reg1=new RegExp("[0-9a-zA-z-]*.m3u8");
 	var fileName = reg1.exec(m3u8Url);
-	var path = "data://videoCache/"+courseID+"/"+taskID+"/fileName";
+	var path = "data://videoCache/"+courseID+"/"+taskID+"/"+fileName;
 	nf.alert(path);
 	deviceone.print(path);
 	download(m3u8Url,path,downloadId, function(data) {

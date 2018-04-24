@@ -29,7 +29,7 @@ http.post(apiName,{},function(data){
 	server:"esp",
 	cache:0
 });
-dataCache.removeAll("data://player.html");
+//dataCache.removeAll("data://player.html");
 InitData.copyFile("initdata://player.html","data://player.html", function(data, e) {})
 
 /*********************************************************/
