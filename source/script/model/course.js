@@ -77,7 +77,7 @@ function cacheVideo(courseID,taskID,m3u8Url,callback){
 			//解析TS
 			
 			//下载TS
-			}
+			
 		})
 	})
 }
