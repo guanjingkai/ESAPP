@@ -8,6 +8,7 @@ var http = require("util/http");
 var nf = d.sm("do_Notification");
 var config = require("config/config");
 var dataCache = d.sm("do_DataCache");
+var storage = d.sm("do_Storage");
 module.exports.getCourseSetDetail = getCourseSetDetail;
 module.exports.getCourseItem = getCourseItem;
 module.exports.cacheVideo = cacheVideo;
@@ -67,24 +68,27 @@ function cacheVideo(courseID,taskID,m3u8Url,callback){
 	var reg1=new RegExp("[0-9a-zA-z-]*.m3u8");
 	var fileName = reg1.exec(m3u8Url);
 	var path = "data://videoCache/"+courseID+"/"+taskID+"/"+fileName;
-	nf.alert(path);
-	deviceone.print(path);
-	download(m3u8Url,path,downloadId, function(data) {
-		nf.alert(data);
+	d.print(path);
+	//nf.alert("path:"+path);
+	downloadFile(m3u8Url,path,downloadId, function(fileData) {
+		storage.readFile(path, function(m3u8Data, e) {
+			m3u8Data = JSON.stringify(m3u8Data);
+			//nf.alert(m3u8Data);
+			//解析TS
+			
+			//下载TS
+			}
+		})
 	})
 }
 
-function download(url,path,downloadId,callBack){
+function downloadFile(m3u8Url,downloadPath,downloadId,callBack){
 	var http = d.mm("do_Http");
-	http.url = url;
-	http.download1(path, downloadId, isBreakpoint);
+	http.url = m3u8Url;
+	http.download1(downloadPath, downloadId, true);
 	http.on("result", function(data) {
-		if(data.error){
-			//todo
-		}else{
-			callBack(data.data);
-		}
+		callBack(data);
 	}).on("fail",function(data){
-		//nf.alert("请求失败了"+JSON.stringify(data));
+		
 	});
 }
