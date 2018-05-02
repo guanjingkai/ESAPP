@@ -12,6 +12,7 @@ var storage = d.sm("do_Storage");
 module.exports.getCourseSetDetail = getCourseSetDetail;
 module.exports.getCourseItem = getCourseItem;
 module.exports.cacheVideo = cacheVideo;
+module.exports.downloadMp4 = downloadMp4;
 
 function getCourseSetDetail (courseSetID,callBack) {
 	var apiName = "/api/course_sets/" + courseSetID + "/courses";
@@ -111,6 +112,18 @@ function downloadFile(m3u8Url,downloadPath,downloadId,callBack){
 		callBack(data);
 	}).on("fail",function(data){
 		
+	});
+}
+function downloadMp4(mp4Url,downloadPath,downloadId,callBack){
+	d.print(mp4Url);
+	var http = d.mm("do_Http","id1","app");
+	http.url = mp4Url;
+	http.download1(downloadPath, downloadId, true);
+	http.on("result", function(data) {
+		d.print("chenggong");
+		callBack(data);
+	}).on("fail",function(data){
+		d.print("shibai");
 	});
 }
 function zhuanyi(s){

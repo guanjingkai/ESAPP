@@ -85,10 +85,12 @@ itemBox.on("touch",function(){
 						}
 					}
 					//下载m3u8
-					course.cacheVideo(courseID,taskID,m3u8url,function(){
-						
-					});
-					
+//					course.cacheVideo(courseID,taskID,m3u8url,function(){
+//						
+//					});
+					course.downloadMp4("https://hls.chungold.com/eea8424fec27483391d0b45266bd08ec/1fda1119f48d4311b9eff7062d8737f8-6033ce7f75a44881181768b0d955fc83-od-S00000001-200000.mp4", "data://videoCache/test.mp4", "123333", function() {
+						deviceone.print("文件是否下载");
+					})
 				},{
 					server:"esp"
 				});

@@ -14,15 +14,15 @@ storage.getFiles("data://videoCache/32/244/", function(data, e) {
 	deviceone.print(data);
 })
 
-http.url = "http://127.0.0.1:2333/123";
-http.method   = "get";
-http.request();
-http.on("result", function(data) {
-	deviceone.print("get"+JSON.stringify(data));
-}).on("fail",function(data){
-	nf.alert("请求失败了"+JSON.stringify(data));
-});
-//player.path = "data://videoCache/32/244/04ad69dd478e451faa088302e477ce40-051d50b3ade3c67c307704e2db1d365f-hd.m3u8";
-player.path = "http://127.0.0.1:2333/123";
+//http.url = "http://127.0.0.1:2333/123";
+//http.method   = "get";
+//http.request();
+//http.on("result", function(data) {
+//	deviceone.print("get"+JSON.stringify(data));
+//}).on("fail",function(data){
+//	nf.alert("请求失败了"+JSON.stringify(data));
+//});
+////player.path = "data://videoCache/32/244/04ad69dd478e451faa088302e477ce40-051d50b3ade3c67c307704e2db1d365f-hd.m3u8";
+player.path = "data://videoCache/test.mp4";
 player.play();
 
