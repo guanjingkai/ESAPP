@@ -64,19 +64,40 @@ function cacheVideo(courseID,taskID,m3u8Url,callback){
 	cacheVideo.videoData[courseID] = [];
 	cacheVideo.videoData[courseID][taskID] = [];
 	cacheVideo.videoData[courseID][taskID].m3u8Url = m3u8Url;
-	var downloadId = "video|"+courseID+"|"+taskID;
 	var reg1=new RegExp("[0-9a-zA-z-]*.m3u8");
 	var fileName = reg1.exec(m3u8Url);
 	var path = "data://videoCache/"+courseID+"/"+taskID+"/"+fileName;
+	var downloadId = "video|"+courseID+"|"+taskID+"|"+fileName;
 	d.print(path);
 	//nf.alert("path:"+path);
 	downloadFile(m3u8Url,path,downloadId, function(fileData) {
+		
+		//解析M3U8地址
+		var patt1=/[a-zA-z]+:\/\/[^\s]*\//;
+		var thisVideoUrlMain = patt1.exec(m3u8Url).toString();
+		d.print("M3U8文件是否下载"+storage.fileExist(path));
+		d.print(path);
 		storage.readFile(path, function(m3u8Data, e) {
 			m3u8Data = JSON.stringify(m3u8Data);
 			//nf.alert(m3u8Data);
+			//deviceone.print(m3u8Data);
 			//解析TS
-			
+			var patt1=new RegExp("[0-9a-zA-z-]*.ts","g");
+			var patt2 = /[0-9a-zA-z-]*.ts/g;
+			//nf.alert(patt2.exec(m3u8Data));
+			d.print(m3u8Data.match(patt2).toString());
+			var tsString = zhuanyi(m3u8Data.match(patt2).toString());
+			var tsArray = tsString.split(',');
 			//下载TS
+			for(var i = 0;i<tsArray.length;i++){
+				var tsUrl = thisVideoUrlMain + tsArray[i];
+				var tsPath = "data://videoCache/"+courseID+"/"+taskID+"/"+tsArray[i];
+				var downloadId = "video|"+courseID+"|"+taskID+"|"+tsArray[i];
+				downloadFile(tsUrl,tsPath,downloadId, function(fileData2) {
+					d.print("文件是否下载"+storage.fileExist(tsPath));
+					d.print(tsPath);
+				});
+			}
 			
 		})
 	})
@@ -91,4 +112,7 @@ function downloadFile(m3u8Url,downloadPath,downloadId,callBack){
 	}).on("fail",function(data){
 		
 	});
+}
+function zhuanyi(s){
+	return s.replace(/[\'\"\\\/\b\f\n\r\t\\n]/g, '');
 }

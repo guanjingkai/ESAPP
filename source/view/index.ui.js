@@ -3,7 +3,7 @@ var app = sm("do_App");
 var page = sm("do_Page");
 var InitData = sm("do_InitData");
 var dataCache = sm("do_DataCache");
-
+var socketServer = sm("do_SocketServer");
 var config	 = require("config/config");
 var http     = require("util/http");
 var edusoho  = require("util/edusoho");
@@ -33,9 +33,16 @@ http.post(apiName,{},function(data){
 InitData.copyFile("initdata://player.html","data://player.html", function(data, e) {})
 
 /*********************************************************/
-
+socketServer.startListen(2333);
+socketServer.on("listen", function(data, e) {
+	deviceone.print(JSON.stringify(data));
+	return 123;
+})
+socketServer.on("error", function(data, e) {
+	deviceone.print("error");
+})
+/*********************************************************/
 var main_shower = ui("main_shower");
-
 var tabbarIndex = ui("index");
 var tabbarWiki = ui("wiki");
 var tabbarSns = ui("sns");
